@@ -125,7 +125,7 @@ export default {
         message: "",
       });
       context.commit("setLoading", false);
-      context.dispatch("handleData", data)
+      context.dispatch("handleData", payload)
       .catch((error) => {
         context.commit("setError", {
           state: true,

@@ -202,23 +202,9 @@ export default {
             self.$store.commit("force/setFocusState", null);
             self.$store.commit("force/setAllStatesData", null);
             self.$nextTick(() => {
-              self.$store.dispatch("force/uploadData", hierarchicalData.state[0]);
-              /*self.$store.commit("force/setLoading", true);
-              self.$store.commit("setError", {
-                state: false,
-                message: "",
-              });
-              self.$store.commit("force/setLoading", false);
-              self.$store.dispatch("force/handleData", hierarchicalData.state[0]).catch((error) => {
-                context.commit("setError", {
-                  state: true,
-                  message: error.message,
-                });
-                self.$store.commit("force/setLoading", false);
-                console.error("error:", error.message);
-              });*/
+              self.$store.dispatch("force/uploadData2", hierarchicalData.state[0]);
             });
-          });
+          });s
         })
       })
     },
