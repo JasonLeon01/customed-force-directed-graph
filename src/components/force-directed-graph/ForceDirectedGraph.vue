@@ -2253,6 +2253,16 @@ export default {
             togglePin,
             nodeTypeColor
           );
+        })
+        .on("custom", function() {
+          circleClick2(
+            that,
+            this,
+            simulation,
+            changeLinkStyle,
+            togglePin,
+            nodeTypeColor
+          );
         });
 
       const containerGroup = circleG;
@@ -2683,6 +2693,129 @@ export default {
         }
       }
 
+      function circleClick2(
+        self,
+        that,
+        simulation,
+        changeLinkStyle,
+        togglePin,
+        nodeTypeColor
+      ) {
+        // ! 注意selectedNode,只能通过self访问，watch才能及时响应
+        // 获取选择circle对应的container - g元素
+        const g = d3.select(that.parentNode);
+        
+        // 显示vega-lite图
+        if (!g.datum().showDetail) {
+          g.datum().showDetail = true;
+
+          const circle = d3.select(that);
+          const rect = g.selectChild(".rect");
+          const insightIcon = g.selectChild(".insight-icon");
+          const rectTitle = g.select(".rect-title");
+          const rectText = g.selectChildren(".title-text");
+
+          rect.classed("not-show", false);
+          rectTitle.classed("not-show", false);
+          rectText.classed("not-show", false);
+          circle.classed("not-show", true);
+          insightIcon.classed("not-show", true);
+
+          g.append("use")
+            .attr("href", "#defs-remove")
+            .attr("class", "remove vega-lite-icon")
+            .attr("cursor", "pointer")
+            .on("click", function () {
+              g.datum().showDetail = false;
+              g.datum().pinned = false;
+
+              g.classed("pinned", false);
+              g.datum().fx = null;
+              g.datum().fy = null;
+              if (state === self.focusState) {
+                self.selectedNode = {
+                  id: null,
+                  state: state,
+                  insightIndex: null,
+                  "insight-list": null,
+                  col: null,
+                  row: null,
+                };
+                selectedNodes.set(state, self.selectedNode);
+              } else {
+                selectedNodes.set(state, {
+                  id: null,
+                  state: state,
+                  insightIndex: null,
+                  "insight-list": null,
+                  col: null,
+                  row: null,
+                });
+                self.filterNode = {
+                  id: null,
+                  state: state,
+                  insightIndex: null,
+                  "insight-list": null,
+                };
+              }
+
+              g.selectChildren(".vega-lite-icon").remove();
+              self.deleteVegaLite(g, state);
+              const collideForce = simulation.force("collide");
+              const bodyForce = simulation.force("charge");
+              const linkForce = simulation.force("link");
+              if (collideForce)
+                collideForce.initialize(simulation.nodes(), d3.randomLcg);
+              if (linkForce)
+                linkForce.initialize(simulation.nodes(), d3.randomLcg);
+              if (bodyForce) {
+                simulation.force("charge", null);
+                simulation.force("charge", bodyForce);
+              }
+              rect.classed("not-show", true);
+              rectTitle.classed("not-show", true);
+              rectText.classed("not-show", true);
+              circle
+                .classed("not-show", false)
+                .attr("transform", "scale(1)")
+                .attr("fill", function () {
+                  const gData = d3.select(that.parentNode).datum();
+
+                  return nodeTypeColor(
+                    gData["insight-list"][gData.insightIndex][
+                      "insight-category"
+                    ]
+                  );
+                });
+
+              insightIcon.classed("not-show", false);
+              changeLinkStyle(g.datum().id, false);
+              self.simulationRestart(simulation);
+            });
+
+          g.append("use")
+            .attr("href", "#defs-pin")
+            .attr("class", "pin vega-lite-icon")
+            .attr("cursor", "pointer")
+            .on("click", togglePin);
+
+          const ele = g.append("use")
+            .attr("href", "#defs-check")
+            .attr("class", "check vega-lite-icon")
+            .attr("cursor", "pointer")
+            .on("click", function () {
+              toggleCheck(self, this, checkIndex);
+            });
+
+            ele.dispatch("click");
+
+          self.drawVegaLite(g, "img", state);
+
+          const nodeId = g.datum().id;
+          changeLinkStyle(nodeId, true);
+        }
+      }
+
       function rectMouseover(self, that, neighborMaps, hoverIndex) {
         //颜色变，表示被选中
         const neighborMap = neighborMaps.get(state);
@@ -2845,6 +2978,12 @@ export default {
           }
         }
       }
+      circleGroup.each(function(d, i) {
+      const currentNode = this;
+      setTimeout(function() {
+        currentNode.dispatchEvent(new Event("custom"))
+      }, i * 1);
+    });
     },
 
     neighborHighligt(id, neighbor, type, enable, state) {

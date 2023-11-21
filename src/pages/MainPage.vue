@@ -186,7 +186,7 @@ export default {
   methods: {
     autoExecuteFunction() {
       self = this
-      getHierarchicalData("db.json").then(function(hierarchicalData) {
+      getHierarchicalData("test.json").then(function(hierarchicalData) {
         let treeDataDeferObj = $.Deferred()
         $.when(treeDataDeferObj).then(function() {
           self.loading = false
