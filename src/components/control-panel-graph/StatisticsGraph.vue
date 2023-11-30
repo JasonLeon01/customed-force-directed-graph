@@ -301,7 +301,6 @@ export default {
     },
     drawHistogram(newVal) {
       const that = this;
-      console.log(newVal);
 
       if (!this.histogramConfig) {
         // initialization

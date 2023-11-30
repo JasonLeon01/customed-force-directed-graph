@@ -5,7 +5,7 @@
     element-loading-text="Computing..."
   >
     <nav class="navBar">
-      <div class="nav-title">InsightGraph</div>
+      <div class="nav-title">力导图系统</div>
       <div class="nav-button-box">
         <div class="uploader">
           <svg
@@ -82,9 +82,9 @@
     >
       <div class="loading-mask" v-if="error.state || error_ph.state">
         <div class="introduction">
-          <div>Upload <strong>.xls/.xlsx</strong> files now</div>
+          <div></div>
 
-          <div>and start exploring <em>Insight Stories</em>!</div>
+          <div></div>
         </div>
       </div>
 
