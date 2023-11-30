@@ -1343,50 +1343,50 @@ export default {
             });
           break;
         case "focus":
-          // svg
-          //   .append("use")
-          //   .attr("class", "focus-icon")
-          //   .attr("href", "#defs-focus")
-          //   .attr("x", "1%")
-          //   .attr("y", "1%")
-          //   .attr("width", "8%")
-          //   .attr("height", "8%")
-          //   .style("color", "transparent")
-          //   .attr("cursor", "pointer")
-          //   .on("mouseover", function () {
-          //     d3.select(this)
-          //       .classed("hover-highlight", true)
-          //       .style("color", "#8d93a7");
-          //   })
-          //   .on("mouseleave", function () {
-          //     d3.select(this)
-          //       .classed("hover-highlight", false)
-          //       .style("color", "transparent");
-          //   })
-          //   .on("click", function () {
-          //     that.backMode = false;
+           svg
+             .append("use")
+             .attr("class", "focus-icon")
+             .attr("href", "#defs-focus")
+             .attr("x", "1%")
+             .attr("y", "1%")
+             .attr("width", "8%")
+             .attr("height", "8%")
+             .style("color", "transparent")
+             .attr("cursor", "pointer")
+             .on("mouseover", function () {
+              d3.select(this)
+                 .classed("hover-highlight", true)
+                 .style("color", "#8d93a7");
+             })
+             .on("mouseleave", function () {
+               d3.select(this)
+                 .classed("hover-highlight", false)
+                 .style("color", "transparent");
+             })
+             .on("click", function () {
+               that.backMode = false;
 
           //     // 更新 preservedBundleData
-          //     that.preservedBundleData = that.updatePreservedBundle();
-          //     // load new data
-          //     const state = d3.select(this.parentNode).datum().id;
-          //     that.oldFocusState = that.focusState;
-          //     that.focusState = state;
-          //     const oldFocusStateLinksMap = that.oldFoucsStateLinksMaps.get(
-          //       that.oldFocusState
-          //     );
+               that.preservedBundleData = that.updatePreservedBundle();
+               // load new data
+               const state = d3.select(this.parentNode).datum().id;
+               that.oldFocusState = that.focusState;
+               that.focusState = state;
+               const oldFocusStateLinksMap = that.oldFoucsStateLinksMaps.get(
+                 that.oldFocusState
+               );
 
-            //   for (const [id, stateMap] of oldFocusStateLinksMap.entries()) {
-            //     // 如果有stateMap，才记录
-            //     if (stateMap) {
-            //       oldFocusStateLinksMap.set(id, stateMap.get(that.focusState));
-            //     }
-            //   }
+               for (const [id, stateMap] of oldFocusStateLinksMap.entries()) {
+                 // 如果有stateMap，才记录
+                 if (stateMap) {
+                   oldFocusStateLinksMap.set(id, stateMap.get(that.focusState));
+                 }
+               }
 
-            //   that.$store.dispatch("force/loadData", {
-            //     state: state,
-            //   });
-            // });
+               that.$store.dispatch("force/loadData", {
+                 state: state,
+               });
+             });
           break;
       }
     },
