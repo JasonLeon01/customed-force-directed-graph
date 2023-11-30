@@ -2217,7 +2217,49 @@ export default {
         }
       });
 
-      
+      //画nodes
+      const circleGroup = circleG
+        .append("circle")
+        .attr("class", "circle normal-circle")
+        .classed("not-show", function () {
+          const gData = d3.select(this.parentNode).datum();
+          return gData.showDetail;
+        })
+        .attr("r", function () {
+          return d3.select(this.parentNode).datum().circleR;
+        })
+        .attr("fill", function () {
+          const gData = d3.select(this.parentNode).datum();
+          return nodeTypeColor(
+            gData["insight-list"][gData.insightIndex]["insight-category"]
+          );
+        })
+        .style("transition", "transform 0.2s")
+        .on("mouseover", function () {
+          circleMouseover(that, this, hoverIndex);
+        })
+        .on("mouseout", function () {
+          circleMouseout(that, this, hoverIndex);
+        })
+        .on("click", function () {
+          circleClick(
+            that,
+            this,
+            simulation,
+            changeLinkStyle,
+            togglePin,
+            nodeTypeColor
+          );
+        }).on("custom", function () {
+          circleClick2(
+            that,
+            this,
+            simulation,
+            changeLinkStyle,
+            togglePin,
+            nodeTypeColor
+          );
+        });
 
       const containerGroup = circleG;
 
@@ -2662,13 +2704,12 @@ export default {
         // ! 注意selectedNode,只能通过self访问，watch才能及时响应
         // 获取选择circle对应的container - g元素
         const g = d3.select(that.parentNode);
-        // console.log(g, g.datum());
-    
+
         // 显示vega-lite图
-          // if (g.datum().hasOwnProperty('showDetail')) {
-          //   g.datum().showDetail = true;
-          // }
-          // const circle = d3.select(that);
+        if (!g.datum().showDetail) {
+          g.datum().showDetail = true;
+
+          const circle = d3.select(that);
           const rect = g.selectChild(".rect");
           const insightIcon = g.selectChild(".insight-icon");
           const rectTitle = g.select(".rect-title");
@@ -2677,80 +2718,8 @@ export default {
           rect.classed("not-show", false);
           rectTitle.classed("not-show", false);
           rectText.classed("not-show", false);
-          // circle.classed("not-show", true);
+          circle.classed("not-show", true);
           insightIcon.classed("not-show", true);
-
-          // g.append("use")
-          //   .attr("href", "#defs-remove")
-          //   .attr("class", "remove vega-lite-icon")
-          //   .attr("cursor", "pointer")
-          //   .on("click", function () {
-          //     g.datum().showDetail = false;
-          //     g.datum().pinned = false;
-
-          //     g.classed("pinned", false);
-          //     g.datum().fx = null;
-          //     g.datum().fy = null;
-          //     if (state === self.focusState) {
-          //       self.selectedNode = {
-          //         id: null,
-          //         state: state,
-          //         insightIndex: null,
-          //         "insight-list": null,
-          //         col: null,
-          //         row: null,
-          //       };
-          //       selectedNodes.set(state, self.selectedNode);
-          //     } else {
-          //       selectedNodes.set(state, {
-          //         id: null,
-          //         state: state,
-          //         insightIndex: null,
-          //         "insight-list": null,
-          //         col: null,
-          //         row: null,
-          //       });
-          //       self.filterNode = {
-          //         id: null,
-          //         state: state,
-          //         insightIndex: null,
-          //         "insight-list": null,
-          //       };
-          //     }
-
-          //     g.selectChildren(".vega-lite-icon").remove();
-          //     self.deleteVegaLite(g, state);
-          //     const collideForce = simulation.force("collide");
-          //     const bodyForce = simulation.force("charge");
-          //     const linkForce = simulation.force("link");
-          //     if (collideForce)
-          //       collideForce.initialize(simulation.nodes(), d3.randomLcg);
-          //     if (linkForce)
-          //       linkForce.initialize(simulation.nodes(), d3.randomLcg);
-          //     if (bodyForce) {
-          //       simulation.force("charge", null);
-          //       simulation.force("charge", bodyForce);
-          //     }
-          //     rect.classed("not-show", true);
-          //     rectTitle.classed("not-show", true);
-          //     rectText.classed("not-show", true);
-          //     // circle
-          //     //   .classed("not-show", false)
-          //     //   .attr("transform", "scale(1)")
-          //     //   .attr("fill", function () {
-          //     //     const gData = g.datum();
-
-          //     //     return nodeTypeColor(
-          //     //       gData["insight-list"][gData.insightIndex][
-          //     //         "insight-category"
-          //     //       ]
-          //     //     );
-          //     //   });
-
-          //     insightIcon.classed("not-show", false);
-          //     changeLinkStyle(g.datum().id, false);
-          //     self.simulationRestart(simulation);
-          //   });
 
           g.append("use")
             .attr("href", "#defs-pin")
@@ -2766,16 +2735,13 @@ export default {
               toggleCheck(self, this, checkIndex);
             });
 
-        
-         
+            ele.dispatch("click");
 
           self.drawVegaLite(g, "img", state);
-          ele.dispatch("click");
-  
 
           const nodeId = g.datum().id;
           changeLinkStyle(nodeId, true);
-      
+        }
       }
 
       function rectMouseover(self, that, neighborMaps, hoverIndex) {
@@ -2940,20 +2906,12 @@ export default {
           }
         }
       }
-    //   circleGroup.each(function(d, i) {
-    //   const currentNode = this;
-    //   setTimeout(function() {
-    //     currentNode.dispatchEvent(new Event("custom"))
-    //   }, i * 1);
-    // });
-
-
-      vegaLiteContainerGroup.each(function(){
-        circleClick2(that,this,simulation,changeLinkStyle,togglePin,nodeTypeColor)
-        // that.drawVegaLite(d3.select(this.parentNode),'svg',state);
-      }
-      );
-  
+       circleGroup.each(function(d, i) {
+       const currentNode = this;
+       setTimeout(function() {
+         currentNode.dispatchEvent(new Event("custom"))
+       }, i * 1);
+     });
     },
 
     neighborHighligt(id, neighbor, type, enable, state) {
@@ -3359,26 +3317,27 @@ export default {
           switch (mode) {
             case "img":
               // 创建反应新状态的img
-              // svg.classed("not-show", true);
-              // const imgInfo = gData.img;
-              // view.toCanvas(5).then((canvas) => {
-              //   // Access the canvas element and export as an image
-              //   const image = document.createElementNS(
-              //     "http://www.w3.org/2000/svg",
-              //     "image"
-              //   );
-              //   image.setAttribute("href", canvas.toDataURL("image/png", 1));
-              //   image.setAttribute("width", imgInfo.width);
-              //   image.setAttribute("height", imgInfo.height);
-              //   image.setAttribute("class", "vega-lite-graph");
-              //   container.node().appendChild(svg.node());
-              //   container.node().appendChild(image);
-              //   g.select("image")
-              //     .attr("opacity", 0)
-              //     .transition()
-              //     .duration(175)
-              //     .attr("opacity", 1);
-              // });
+               svg.classed("not-show", true);
+               const imgInfo = gData.img;
+               view.toCanvas(5).then((canvas) => {
+                 // Access the canvas element and export as an image
+                 const image = null;
+                 //document.createElementNS(
+                 //  "http://www.w3.org/2000/svg",
+                 //  "image"
+                 //);
+                 image.setAttribute("href", canvas.toDataURL("image/png", 1));
+                 image.setAttribute("width", imgInfo.width);
+                 image.setAttribute("height", imgInfo.height);
+                 image.setAttribute("class", "vega-lite-graph");
+                 container.node().appendChild(svg.node());
+                 container.node().appendChild(image);
+                 g.select("image")
+                   .attr("opacity", 0)
+                   .transition()
+                   .duration(175)
+                   .attr("opacity", 1);
+               });
               break;
             case "svg":
               // 初始就设置为 pinned 状态
@@ -4209,46 +4168,9 @@ export default {
             svgTop.node()
           );
 
-          const sourcexy = [d.source.x, d.source.y];
-          const targetxy = [d.target.x, d.target.y];
-          // const dx = Math.abs(sourcexy[0] - targetxy[0]);
-          // const dy = Math.abs(sourcexy[1] - targetxy[1]);
-          let tmpsourcePoint, tmptargetPoint;
-          
-          // 如果垂直距离大于水平距离3倍，则最近的两条边是上边和下边
-          //  if (dx * 5 > dy) {
-            // // 如果source在target的左边
-            // if (sourcexy[0] < targetxy[0]) {
-            //   tmpsourcePoint = [sourcexy[0] + d.source.rect.width / 2, sourcexy[1]];
-            //   tmptargetPoint = [targetxy[0] - d.target.rect.width / 2, targetxy[1]];
-            // }
-            // // 如果source在target的右边
-            // else {
-              tmpsourcePoint = [sourcexy[0] - d.source.rect.width / 2, sourcexy[1]];
-              tmptargetPoint = [targetxy[0] + d.target.rect.width / 2, targetxy[1]];
-            // }
-          // }
-          // // 如果水平距离小于等于垂直距离，则最近的两条边是上边和下边
-          // else {
-          //   // 如果source在target的上边
-          //   if (sourcexy[1] < targetxy[1]) {
-          //     tmpsourcePoint = [sourcexy[0], sourcexy[1] + d.source.rect.height / 2];
-          //     tmptargetPoint = [targetxy[0], targetxy[1] - d.target.rect.height / 2];
-          //   }
-          //   // 如果source在target的下边
-          //   else {
-          //     tmpsourcePoint = [sourcexy[0], sourcexy[1] - d.source.rect.height / 2];
-          //     tmptargetPoint = [targetxy[0], targetxy[1] + d.target.rect.height / 2];
-          //   }
-          // }
-
-          const sourcePointOrigin = tmpsourcePoint;
-          const targetPointOrigin = tmptargetPoint;
-          //const sourcePointOrigin = [d.source.x, d.source.y];
-          //const targetPointOrigin = [d.target.x, d.target.y];
+          const sourcePointOrigin = [d.source.x, d.source.y];
+          const targetPointOrigin = [d.target.x, d.target.y];
           // const sourcePointOrigin = sourceSvgElement.createSVGPoint();
-          // sourcePointOrigin.x = d.source.x;
-          // sourcePointOrigin.y = d.source.y;
 
           const sourcePoint = getClosetRectPoint(
             sourcePointOrigin,
@@ -4563,12 +4485,11 @@ export default {
           "collide",
           d3
             .forceCollide((d) => {
-              // if (d.showDetail) {
-              //   return d.rect.r;
-              // } else {
-              //   return d.circleR;
-              // }
-              return 150;
+               if (d.showDetail) {
+                 return d.rect.r;
+               } else {
+                 return d.circleR;
+               }
             })
             .strength(defaultForceConfig.collide.Strength)
             .iterations(defaultForceConfig.collide.Iterations)
