@@ -374,14 +374,14 @@
       <!-- insight icon -->
     </defs>
 
-    <el-dialog v-model="dialogVisible" title="Multiple Input Dialog">
+    <el-dialog v-model="dialogVisible" title="新增数据">
       <div class="input-container">
-        <label>Please input word1:</label>
+        <label>数据标题:</label>
         <input v-model="input1" type="text" />
       </div>
 
       <div class="input-container">
-        <label>Please input word2:</label>
+        <label>数据内容:</label>
         <textarea v-model="input2" type="text" row="3" />
       </div>
       <span slot="footer" class="dialog-footer">
