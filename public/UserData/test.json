@@ -823,13 +823,33 @@
                         }
                       ],
                       "state": "S2"
+                    },
+                    {
+                      "id": "测试id",
+                      "row": "测试row",
+                      "col": "测试col",
+                      "insight-list": [
+                        {
+                          "insight-type": "测试type",
+                          "insight-category": "point",
+                          "insight-score": 0.6269982238010657,
+                          "vega-lite": "{\"data\": {\"values\": [{\"category\": \"Nintendo 3DS (3DS)\", \"value\": 3530.0}, {\"category\": \"Nintendo DS (DS)\", \"value\": 290.0}, {\"category\": \"Nintendo Switch (NS)\", \"value\": 0.0}, {\"category\": \"Wii (Wii)\", \"value\": 1210.0}, {\"category\": \"Wii U (WiiU)\", \"value\": 600.0}]}, \"mark\": {\"type\": \"arc\", \"innerRadius\": 5, \"stroke\": \"#fff\"}, \"encoding\": {\"theta\": {\"field\": \"value\", \"type\": \"quantitative\", \"stack\": true}, \"color\": {\"field\": \"category\", \"type\": \"nominal\", \"legend\": null}, \"order\": {\"field\": \"value\", \"type\": \"quantitative\", \"sort\": \"descending\"}, \"radius\": {\"field\": \"value\", \"scale\": {\"type\": \"linear\", \"zero\": true, \"rangeMin\": 20}}, \"tooltip\": [{\"field\": \"category\", \"type\": \"nominal\"}, {\"field\": \"value\", \"type\": \"quantitative\"}]}}"
+                        }
+                      ],
+                      "state": "测试状态"
                     }
+
                 ],
                 "links": [
                     {
                         "source": "0_-2013_",
                         "target": "0_-2014_",
                         "type": "siblings"
+                    },
+                    {
+                      "source": "1_Europe-2013_",
+                      "target": "1_Japan-2013_",
+                      "type": "siblings"
                     }
                 ]
             },
@@ -840,6 +860,9 @@
                       "2_Microsoft_North America-2013_",
                       "2_Microsoft_Other-2013_",
                       "2_Nintendo_Europe-2013_"
+                    ],
+                    "测试状态": [
+                      "测试id"
                     ]
                 }
             }

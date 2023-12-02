@@ -20,6 +20,7 @@ window.d3 = d3;
 window.$ = $;
 window.vegaEmbed = vegaEmbed;
 window.echarts = echarts;
+window.totalData = new Map();
 
 const app = createApp(App);
 app.use(router);

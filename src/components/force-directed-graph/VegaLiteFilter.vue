@@ -12,7 +12,7 @@
     </svg>
     <BaseCard mode="flat" class="content-box">
       <div class="content">
-        <div v-for="(insight, index) in currentPageData" class="insight-box">
+        <!-- <div v-for="(insight, index) in currentPageData" class="insight-box">
           <div class="info-box">
             <label>Score</label>
             <div class="score-box">
@@ -44,16 +44,16 @@
           </div>
 
           <div id="vega-lite-filtered-container" ref="vegaContainers"></div>
-        </div>
+        </div> -->
       </div>
-      <el-pagination
+      <!-- <el-pagination
         small
         :page-size="pageSize"
         layout="prev, pager, next"
         :total="insightList.length"
         v-model:current-page="currentPage"
         class="pagination"
-      />
+      /> -->
     </BaseCard>
   </div>
 </template>
