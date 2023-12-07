@@ -19,7 +19,7 @@
         
       </div>
     </transition>
-    <transition name="slide">
+<!--     <transition name="slide">
       <VegaLiteFilter
         v-if="showMorePanel"
         :insightList="filterNode['insight-list']"
@@ -28,7 +28,7 @@
         @insightIndexChange="changeInsightIndex"
         @hideMoreBox="hideMoreBox"
       ></VegaLiteFilter>
-    </transition>
+    </transition> -->
 
     <div id="force-svg-container">
       <svg
@@ -377,31 +377,33 @@
     <el-dialog v-model="dialogVisible" title="新增数据">
       <div class="input-container">
         <label>数据标题:</label>
+      </div>
+      <div>
         <input v-model="input1" type="text" />
       </div>
-
+      
       <div class="input-container">
         <label>数据内容:</label>
+      </div>
+      <div>
         <textarea v-model="input2" type="text" row="3" />
       </div>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="dialogVisible = false">Cancel</el-button>
-        <el-button type="primary" @click="confirm">Confirm</el-button>
+        <el-button @click="dialogVisible = false">取消</el-button>
+        <el-button type="primary" @click="confirm">确认</el-button>
       </span>
     </el-dialog>    
   </div>
 </template>
 
 <script>
-import VegaLiteFilter from "@/components/force-directed-graph/VegaLiteFilter.vue";
+// import VegaLiteFilter from "@/components/force-directed-graph/VegaLiteFilter.vue";
 
 export default {
   components: {
-    VegaLiteFilter,
+    // VegaLiteFilter,
   },
-
   inject: ["loadAllData"],
-
   computed: {
     selectedData() {
       return this.$store.getters["force/selectedData"];
@@ -1528,7 +1530,7 @@ export default {
           .style("color", "transparent")
           .attr("cursor", "pointer")
           .on("click", function () {            
-            const state = d3.select(this.parentNode).datum().id
+              const state = d3.select(this.parentNode).datum().id
               that.get2set(state);
           })
           .on("mouseover", function () {
@@ -2400,7 +2402,6 @@ export default {
           circleMouseout(that, this, hoverIndex);
         })
         .on("click", function () {
-          
           circleClick(
             that,
             this,
@@ -2461,6 +2462,11 @@ export default {
           rectMouseout(that, this, neighborMaps, hoverIndex);
         })
         .on("click", function () {
+          d3.selectAll('.rect').classed("center-highlight", false)
+          d3.selectAll('.rect-title').classed("center-highlight", false)
+          d3.selectAll('.rect').classed("selected-highlight", false)
+          d3.selectAll('.rect-title').classed("selected-highlight", false)
+          d3.selectAll('.network-line').classed("selected-highlight", false)
           rectClick(that, this);
         })
         // .on("dblclick", togglePin);
@@ -2981,7 +2987,6 @@ export default {
           rect.classed("center-highlight", false);
           parentNode.select(".rect-title").classed("center-highlight", false);
         }
-
         if (state === self.oldFocusState) {
           const oldFocusStateLinksMap = self.oldFoucsStateLinksMaps.get(state);
 
@@ -3000,6 +3005,7 @@ export default {
       function rectClick(self, that) {
         // ! 注意:selectedNode
         // 获取对应的container - g元素
+        // console.log('that', that, 'that.parentNode', that.parentNode)
         const g = d3.select(that.parentNode);
         if (state === self.focusState) {
           self.selectedNode = {
@@ -3079,7 +3085,7 @@ export default {
             });
 
             g.select(".check").classed("icon-pinned", false);
-            g.selectChildren("rect, circle").classed("svg-inset", true);
+            // g.selectChildren("rect, circle").classed("svg-inset", true);
             self.handleExploredPath(state, g.datum().id, true);
           // } else {
           //   checkIndex.delete(g.datum().id);
@@ -3463,7 +3469,7 @@ export default {
 
               return `row: ${rowName}`;
             })
-            .attr("font-size", "10px")
+            .attr("font-size", "24px")
             .attr("x", -translateX + that.iconOffset)
             .attr("y", -translateY + that.iconSize + titleHeight)
             .append("tspan")
@@ -4843,11 +4849,11 @@ export default {
     stroke-width: 2.5px;
   }
   &.selected-highlight {
-    stroke: #71627a;
-    stroke-width: 2.5px;
+    // stroke: #71627a;
+    // stroke-width: 1px;
   }
   &.center-highlight {
-    stroke: #22b8cf;
+    stroke: #545b77;
     stroke-width: 3px;
   }
 }
@@ -4907,7 +4913,6 @@ export default {
 
 rect.svg-inset {
   stroke: #545b77 !important;
-
   // stroke-opacity: 0.7;
   stroke-width: 5 !important;
   // filter: url(#inset-shadow);
