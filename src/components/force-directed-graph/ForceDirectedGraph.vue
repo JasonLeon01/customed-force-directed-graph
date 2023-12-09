@@ -822,100 +822,7 @@ export default {
     // },
     checkIndex: {
       handler(newVal, oldVal) {
-        this.$store.dispatch("table/convertCheckSelection", {
-          mode: "checked",
-          data: newVal,
-        });
-        
-        // global links
-        const globalBundleData = [];
-        const linkGTop = d3
-        .select("#force-svg-container")
-        .select("#total-svg")
-        .select("g.link-group");
-
-        // get node map (key: state)
-        const relatedNodeIdMap = new Map();
-        for (let showId of newVal.keys()) {
-          const stateMap = this.stateLinksMap.get(showId);
-          
-          if (stateMap) {
-            for (let [state, nodeIds] of stateMap.entries()) {
-              const singleStateIds = relatedNodeIdMap.get(state);
-              
-              if (singleStateIds) {
-                singleStateIds.push(...nodeIds);
-              } else {
-                const newNodeIds = [];
-                newNodeIds.push(...nodeIds);
-                
-                relatedNodeIdMap.set(state, newNodeIds);
-              }
-              nodeIds.forEach((targetId) => {
-                const stateLineData = linkGTop
-                .select(`line.${this.focusState}_${state}`)
-                .datum();
-                globalBundleData.push({
-                  source: this.nodeIdMaps.get(this.focusState).get(showId),
-                  target: this.nodeIdMaps.get(state).get(targetId),
-                  middle: stateLineData,
-                });
-              });
-            }
-          }
-        }
-        for (let [state, ids] of relatedNodeIdMap.entries()) {
-          // 去掉重复元素
-          const newIds = [...new Set(ids)];
-          relatedNodeIdMap.set(state, newIds);
-        }
-        // 根据该state的本身设置的保存条件，再筛选一次
-        for (let [state, ids] of relatedNodeIdMap.entries()) {
-          const selectedData = this.selectedDatas.get(state);
-          if (selectedData) {
-            relatedNodeIdMap.set(
-              state,
-              ids.filter((id) => selectedData.nodes.includes(id))
-              );
-            }
-        }
-
-        // get new sub graph Data
-        const filteredAllStateData =
-          this.getFilterSubGraphData(relatedNodeIdMap);
-          
-          Array.from(filteredAllStateData.keys()).forEach((state) => {
-            const svg = d3
-            .select("#force-svg-container")
-            .select("#total-svg")
-            .select("g.node-group")
-            .select(`.${state}-state`);
-            
-            const newData = filteredAllStateData.get(state);
-            
-            // redraw inner force graph
-            this.restart(true, state, newData);
-            // global force graph update
-            this.updateSvgSize(svg, this.svgRScale, newData.nodes.length);
-          });
-        // update link distance of svg
-        this.globalSimulation.force("link").distance((d) => {
-          const nodeNumS = d.source.nodeNum;
-          const nodeNumT = d.target.nodeNum;
-          return (
-            this.linkDistanceScale(nodeNumS) + this.linkDistanceScale(nodeNumT)
-            );
-          });
-          // 保存当前的bundleData
-        this.globalBundleData = globalBundleData;
-        // update bundle line attr, 对于新旧focus之间的bundle，需要判断新focus中的点有没有被filter掉， restart函数也要进行 oldBundle的筛选
-        this.updateGlobalBundle(this.filterBundleBySelection(globalBundleData));
-        // change "old focus" state links
-        const oldFocusStateLinksMap = new Map();
-        Array.from(newVal.keys()).forEach((id) => {
-          oldFocusStateLinksMap.set(id, this.stateLinksMap.get(id));
-        });
-        this.oldFoucsStateLinksMaps.set(this.focusState, oldFocusStateLinksMap);
+        this.checkIndexChange(newVal);
       },
       deep: true,
     },
@@ -984,6 +891,104 @@ export default {
     /* -------------------------------------------------------------------------- */
   },
   methods: {
+
+    checkIndexChange(newVal) {
+      this.$store.dispatch("table/convertCheckSelection", {
+          mode: "checked",
+          data: newVal,
+        });
+        
+        // global links
+        const globalBundleData = [];
+        const linkGTop = d3
+        .select("#force-svg-container")
+        .select("#total-svg")
+        .select("g.link-group");
+
+        
+        // get node map (key: state)
+        const relatedNodeIdMap = new Map();
+        for (let showId of newVal.keys()) {
+          const stateMap = this.stateLinksMap.get(showId);
+          
+          if (stateMap) {
+            for (let [state, nodeIds] of stateMap.entries()) {
+              const singleStateIds = relatedNodeIdMap.get(state);
+              
+              if (singleStateIds) {
+                singleStateIds.push(...nodeIds);
+              } else {
+                const newNodeIds = [];
+                newNodeIds.push(...nodeIds);
+                
+                relatedNodeIdMap.set(state, newNodeIds);
+              }
+              nodeIds.forEach((targetId) => {
+                const stateLineData = linkGTop
+                .select(`line.${this.focusState}_${state}`)
+                .datum();
+                globalBundleData.push({
+                  source: this.nodeIdMaps.get(this.focusState).get(showId),
+                  target: this.nodeIdMaps.get(state).get(targetId),
+                  middle: stateLineData,
+                });
+              });
+            }
+          }
+        }
+        for (let [state, ids] of relatedNodeIdMap.entries()) {
+          // 去掉重复元素
+          const newIds = [...new Set(ids)];
+          relatedNodeIdMap.set(state, newIds);
+        }
+        // 根据该state的本身设置的保存条件，再筛选一次
+        for (let [state, ids] of relatedNodeIdMap.entries()) {
+          const selectedData = this.selectedDatas.get(state);
+          if (selectedData) {
+            relatedNodeIdMap.set(
+              state,
+              ids.filter((id) => selectedData.nodes.includes(id))
+              );
+            }
+          }
+          
+        // get new sub graph Data
+        const filteredAllStateData =
+          this.getFilterSubGraphData(relatedNodeIdMap);
+          
+          Array.from(filteredAllStateData.keys()).forEach((state) => {
+            const svg = d3
+            .select("#force-svg-container")
+            .select("#total-svg")
+            .select("g.node-group")
+            .select(`.${state}-state`);
+            
+            const newData = filteredAllStateData.get(state);
+            
+            // redraw inner force graph
+            this.restart(true, state, newData);
+            // global force graph update
+            this.updateSvgSize(svg, this.svgRScale, newData.nodes.length);
+          });
+        // update link distance of svg
+        this.globalSimulation.force("link").distance((d) => {
+          const nodeNumS = d.source.nodeNum;
+          const nodeNumT = d.target.nodeNum;
+          return (
+            this.linkDistanceScale(nodeNumS) + this.linkDistanceScale(nodeNumT)
+            );
+          });
+          // 保存当前的bundleData
+        this.globalBundleData = globalBundleData;
+        // update bundle line attr, 对于新旧focus之间的bundle，需要判断新focus中的点有没有被filter掉， restart函数也要进行 oldBundle的筛选
+        this.updateGlobalBundle(this.filterBundleBySelection(globalBundleData));
+        // change "old focus" state links
+        const oldFocusStateLinksMap = new Map();
+        Array.from(newVal.keys()).forEach((id) => {
+          oldFocusStateLinksMap.set(id, this.stateLinksMap.get(id));
+        });
+        this.oldFoucsStateLinksMaps.set(this.focusState, oldFocusStateLinksMap);
+    },
 
     handleExploredPath(state, nodeId, mode) {
       const exploredPaths = this.exploredPaths;
@@ -1382,8 +1387,6 @@ export default {
 
     // 弹窗获取内容，并增加节点★★★
     get2set(state) {
-      console.log('state', state)
-      console.log('ttdt', window.totalData);;
       this.recordState = state;
       this.dialogVisible = true;
     },
@@ -1392,11 +1395,12 @@ export default {
       this.dialogVisible = false;
       const tmpnodes = {
         id: this.input1,
-        row: this.input2,
-        col: this.input2,
+        row: "_",
+        col: "_",
+        content: this.input2,
         "insight-list": [
           {
-            "insight-type": "kurtosis",
+            "insight-type": this.input1,
             "insight-category": "shape",
             "insight-score": 3.279028305023484,
             "vega-lite": "{\"data\": {\"values\": [{\"category\": \"Microsoft - Xbox 360 (X360) - Europe - MAR\", \"value\": 669.9999999999982}, {\"category\": \"Microsoft - Xbox 360 (X360) - Japan - MAR\", \"value\": 19.999999999999794}, {\"category\": \"Microsoft - Xbox 360 (X360) - North America - MAR\", \"value\": 1580.0000000000055}, {\"category\": \"Microsoft - Xbox 360 (X360) - Other - MAR\", \"value\": 179.99999999999972}, {\"category\": \"Nintendo - Nintendo 3DS (3DS) - Europe - MAR\", \"value\": 1370.0}, {\"category\": \"Nintendo - Nintendo 3DS (3DS) - Japan - MAR\", \"value\": 2090.0}, {\"category\": \"Nintendo - Nintendo 3DS (3DS) - North America - MAR\", \"value\": 1410.0000000000002}, {\"category\": \"Nintendo - Nintendo 3DS (3DS) - Other - MAR\", \"value\": 309.99999999999983}, {\"category\": \"Nintendo - Nintendo DS (DS) - Europe - MAR\", \"value\": 250.0}, {\"category\": \"Nintendo - Nintendo DS (DS) - North America - MAR\", \"value\": 469.99999999999886}, {\"category\": \"Nintendo - Wii (Wii) - Europe - MAR\", \"value\": 410.0000000000037}, {\"category\": \"Nintendo - Wii (Wii) - Japan - MAR\", \"value\": 49.999999999998934}, {\"category\": \"Nintendo - Wii (Wii) - North America - MAR\", \"value\": 560.0000000000023}, {\"category\": \"Nintendo - Wii (Wii) - Other - MAR\", \"value\": 39.99999999999915}, {\"category\": \"Nintendo - Wii U (WiiU) - Europe - MAR\", \"value\": 290.00000000000006}, {\"category\": \"Nintendo - Wii U (WiiU) - Japan - MAR\", \"value\": 510.0}, {\"category\": \"Nintendo - Wii U (WiiU) - North America - MAR\", \"value\": 409.99999999999994}, {\"category\": \"Nintendo - Wii U (WiiU) - Other - MAR\", \"value\": 90.0}, {\"category\": \"Sony - PlayStation 3 (PS3) - Europe - MAR\", \"value\": 1329.9999999999982}, {\"category\": \"Sony - PlayStation 3 (PS3) - Japan - MAR\", \"value\": 380.0000000000008}, {\"category\": \"Sony - PlayStation 3 (PS3) - North America - MAR\", \"value\": 960.0000000000009}, {\"category\": \"Sony - PlayStation 3 (PS3) - Other - MAR\", \"value\": 490.0000000000002}, {\"category\": \"Sony - PlayStation Vita (PSV) - Europe - MAR\", \"value\": 169.99999999999994}, {\"category\": \"Sony - PlayStation Vita (PSV) - Japan - MAR\", \"value\": 270.0}, {\"category\": \"Sony - PlayStation Vita (PSV) - North America - MAR\", \"value\": 140.0000000000001}, {\"category\": \"Sony - PlayStation Vita (PSV) - Other - MAR\", \"value\": 60.0}, {\"category\": \"Microsoft - Xbox 360 (X360) - Europe - JUN\", \"value\": 980.0000000000005}, {\"category\": \"Microsoft - Xbox 360 (X360) - North America - JUN\", \"value\": 1469.9999999999989}, {\"category\": \"Microsoft - Xbox 360 (X360) - Other - JUN\", \"value\": 240.00000000000023}, {\"category\": \"Nintendo - Nintendo 3DS (3DS) - Europe - JUN\", \"value\": 549.9999999999998}, {\"category\": \"Nintendo - Nintendo 3DS (3DS) - Japan - JUN\", \"value\": 660.0000000000001}, {\"category\": \"Nintendo - Nintendo 3DS (3DS) - North America - JUN\", \"value\": 580.0000000000001}, {\"category\": \"Nintendo - Nintendo 3DS (3DS) - Other - JUN\", \"value\": 70.00000000000006}, {\"category\": \"Nintendo - Nintendo DS (DS) - Europe - JUN\", \"value\": 39.99999999999915}, {\"category\": \"Nintendo - Nintendo DS (DS) - North America - JUN\", \"value\": 170.0000000000017}, {\"category\": \"Nintendo - Wii (Wii) - Europe - JUN\", \"value\": 509.999999999998}, {\"category\": \"Nintendo - Wii (Wii) - Japan - JUN\", \"value\": 20.00000000000135}, {\"category\": \"Nintendo - Wii (Wii) - North America - JUN\", \"value\": 179.99999999999972}, {\"category\": \"Nintendo - Wii (Wii) - Other - JUN\", \"value\": 29.99999999999936}, {\"category\": \"Nintendo - Wii U (WiiU) - Europe - JUN\", \"value\": 89.99999999999997}, {\"category\": \"Nintendo - Wii U (WiiU) - Japan - JUN\", \"value\": 110.0000000000001}, {\"category\": \"Nintendo - Wii U (WiiU) - North America - JUN\", \"value\": 130.0000000000001}, {\"category\": \"Nintendo - Wii U (WiiU) - Other - JUN\", \"value\": 30.0}, {\"category\": \"Sony - PlayStation 3 (PS3) - Europe - JUN\", \"value\": 2010.0000000000016}, {\"category\": \"Sony - PlayStation 3 (PS3) - Japan - JUN\", \"value\": 179.99999999999972}, {\"category\": \"Sony - PlayStation 3 (PS3) - North America - JUN\", \"value\": 489.9999999999984}, {\"category\": \"Sony - PlayStation 3 (PS3) - Other - JUN\", \"value\": 1300.0000000000007}, {\"category\": \"Sony - PlayStation Vita (PSV) - Europe - JUN\", \"value\": 330.00000000000006}, {\"category\": \"Sony - PlayStation Vita (PSV) - Japan - JUN\", \"value\": 229.99999999999997}, {\"category\": \"Sony - PlayStation Vita (PSV) - North America - JUN\", \"value\": 69.99999999999984}, {\"category\": \"Sony - PlayStation Vita (PSV) - Other - JUN\", \"value\": 140.0}, {\"category\": \"Microsoft - Xbox 360 (X360) - Europe - SEP\", \"value\": 399.9999999999986}, {\"category\": \"Microsoft - Xbox 360 (X360) - Japan - SEP\", \"value\": 10.000000000000009}, {\"category\": \"Microsoft - Xbox 360 (X360) - North America - SEP\", \"value\": 519.999999999996}, {\"category\": \"Microsoft - Xbox 360 (X360) - Other - SEP\", \"value\": 80.00000000000007}, {\"category\": \"Nintendo - Nintendo 3DS (3DS) - Europe - SEP\", \"value\": 660.0000000000001}, {\"category\": \"Nintendo - Nintendo 3DS (3DS) - Japan - SEP\", \"value\": 789.9999999999991}, {\"category\": \"Nintendo - Nintendo 3DS (3DS) - North America - SEP\", \"value\": 639.9999999999987}, {\"category\": \"Nintendo - Nintendo 3DS (3DS) - Other - SEP\", \"value\": 130.0000000000001}, {\"category\": \"Nintendo - Nintendo DS (DS) - North America - SEP\", \"value\": 140.00000000000057}, {\"category\": \"Nintendo - Wii (Wii) - Europe - SEP\", \"value\": 149.99999999999858}, {\"category\": \"Nintendo - Wii (Wii) - Japan - SEP\", \"value\": 19.999999999999574}, {\"category\": \"Nintendo - Wii (Wii) - North America - SEP\", \"value\": 159.9999999999966}, {\"category\": \"Nintendo - Wii U (WiiU) - Europe - SEP\", \"value\": 89.99999999999997}, {\"category\": \"Nintendo - Wii U (WiiU) - Japan - SEP\", \"value\": 130.0}, {\"category\": \"Nintendo - Wii U (WiiU) - North America - SEP\", \"value\": 139.99999999999991}, {\"category\": \"Nintendo - Wii U (WiiU) - Other - SEP\", \"value\": 30.0}, {\"category\": \"Sony - PlayStation 3 (PS3) - Europe - SEP\", \"value\": 699.9999999999993}, {\"category\": \"Sony - PlayStation 3 (PS3) - Japan - SEP\", \"value\": 179.99999999999972}, {\"category\": \"Sony - PlayStation 3 (PS3) - North America - SEP\", \"value\": 379.999999999999}, {\"category\": \"Sony - PlayStation 3 (PS3) - Other - SEP\", \"value\": 390.00000000000057}, {\"category\": \"Sony - PlayStation Vita (PSV) - Europe - SEP\", \"value\": 130.0000000000001}, {\"category\": \"Sony - PlayStation Vita (PSV) - Japan - SEP\", \"value\": 229.99999999999997}, {\"category\": \"Sony - PlayStation Vita (PSV) - North America - SEP\", \"value\": 110.0000000000001}, {\"category\": \"Sony - PlayStation Vita (PSV) - Other - SEP\", \"value\": 70.0}, {\"category\": \"Microsoft - Xbox 360 (X360) - Europe - DEC\", \"value\": 310.0000000000023}, {\"category\": \"Microsoft - Xbox 360 (X360) - North America - DEC\", \"value\": 350.0000000000014}, {\"category\": \"Microsoft - Xbox 360 (X360) - Other - DEC\", \"value\": 79.99999999999918}, {\"category\": \"Nintendo - Nintendo 3DS (3DS) - Europe - DEC\", \"value\": 949.9999999999993}, {\"category\": \"Nintendo - Nintendo 3DS (3DS) - Japan - DEC\", \"value\": 1380.0000000000007}, {\"category\": \"Nintendo - Nintendo 3DS (3DS) - North America - DEC\", \"value\": 860.0000000000013}, {\"category\": \"Nintendo - Nintendo 3DS (3DS) - Other - DEC\", \"value\": 169.99999999999994}, {\"category\": \"Nintendo - Nintendo DS (DS) - North America - DEC\", \"value\": 49.99999999999716}, {\"category\": \"Nintendo - Wii (Wii) - Europe - DEC\", \"value\": 140.00000000000057}, {\"category\": \"Nintendo - Wii (Wii) - Japan - DEC\", \"value\": 9.999999999999787}, {\"category\": \"Nintendo - Wii (Wii) - North America - DEC\", \"value\": 120.00000000000455}, {\"category\": \"Nintendo - Wii U (WiiU) - Europe - DEC\", \"value\": 130.0}, {\"category\": \"Nintendo - Wii U (WiiU) - Japan - DEC\", \"value\": 89.99999999999986}, {\"category\": \"Nintendo - Wii U (WiiU) - North America - DEC\", \"value\": 189.99999999999994}, {\"category\": \"Nintendo - Wii U (WiiU) - Other - DEC\", \"value\": 30.00000000000003}, {\"category\": \"Sony - PlayStation 3 (PS3) - Europe - DEC\", \"value\": 669.9999999999982}, {\"category\": \"Sony - PlayStation 3 (PS3) - Japan - DEC\", \"value\": 109.99999999999943}, {\"category\": \"Sony - PlayStation 3 (PS3) - North America - DEC\", \"value\": 390.00000000000057}, {\"category\": \"Sony - PlayStation 3 (PS3) - Other - DEC\", \"value\": 279.9999999999994}, {\"category\": \"Sony - PlayStation Vita (PSV) - Europe - DEC\", \"value\": 229.99999999999977}, {\"category\": \"Sony - PlayStation Vita (PSV) - Japan - DEC\", \"value\": 179.99999999999994}, {\"category\": \"Sony - PlayStation Vita (PSV) - North America - DEC\", \"value\": 79.99999999999984}, {\"category\": \"Sony - PlayStation Vita (PSV) - Other - DEC\", \"value\": 40.000000000000036}]}, \"transform\": [{\"density\": \"value\"}], \"mark\": {\"type\": \"area\", \"color\": {\"x1\": 1, \"y1\": 1, \"x2\": 1, \"y2\": 0, \"gradient\": \"linear\", \"stops\": [{\"offset\": 0, \"color\": \"white\"}, {\"offset\": 1, \"color\": \"#e6550d\"}]}}, \"encoding\": {\"x\": {\"field\": \"value\", \"title\": null, \"type\": \"quantitative\"}, \"y\": {\"field\": \"density\", \"type\": \"quantitative\"}}}"
@@ -1415,7 +1419,6 @@ export default {
           });
         }
         else {
-          console.log(window.totalData);
           if (!window.totalData.state_links.hasOwnProperty(this.input1)) {
             window.totalData.state_links[this.input1] = {};
           }
@@ -1552,7 +1555,7 @@ export default {
       const that = this;
       const newBoundaryR = svgRScale(nodeNum);
       const newViewBoxScale = this.svgViewBoxScale(nodeNum);
-      const newWidth = newBoundaryR * 2;
+      const newWidth = newBoundaryR * 2.5;
       const newHeight = newWidth;
       const viewBoxSize = newBoundaryR * newViewBoxScale;
 
@@ -2410,7 +2413,8 @@ export default {
             togglePin,
             nodeTypeColor
           );
-        }).on("custom", function () {
+        })
+        .on("custom", function () {
           circleClick2(
             that,
             this,
@@ -2867,7 +2871,7 @@ export default {
         const g = d3.select(that.parentNode);
 
         // 显示vega-lite图
-        if (!g.datum().showDetail) {
+        //if (!g.datum().showDetail) {
           g.datum().showDetail = true;
 
           const circle = d3.select(that);
@@ -2905,7 +2909,7 @@ export default {
 
           const nodeId = g.datum().id;
           changeLinkStyle(nodeId, true);
-        }
+        //}
       }
 
       function selectwaitAddRect(self, g) {
@@ -3074,7 +3078,7 @@ export default {
 
       function toggleCheck(self, that, checkIndex) {
         //  只能focus状态togglecheck
-        if (state === self.focusState) {
+        //if (state === self.focusState) {
           const g = d3.select(that.parentNode);
           // const checked = true;//!g.datum().checked;
           g.datum().checked = false;//checked;
@@ -3083,23 +3087,23 @@ export default {
               row: g.datum().row,
               col: g.datum().col,
             });
-
             g.select(".check").classed("icon-pinned", false);
             // g.selectChildren("rect, circle").classed("svg-inset", true);
             self.handleExploredPath(state, g.datum().id, true);
+
           // } else {
           //   checkIndex.delete(g.datum().id);
           //   g.select(".check").classed("icon-pinned", false);
           //   g.selectChildren("rect,circle").classed("svg-inset", false);
           //   self.handleExploredPath(state, g.datum().id, false);
           // }
-        }
+        //}
       }
        circleGroup.each(function(d, i) {
        const currentNode = this;
        setTimeout(function() {
          currentNode.dispatchEvent(new Event("custom"))
-       }, i * 1);
+       }, i);
      });
     },
 
@@ -3463,23 +3467,36 @@ export default {
             .attr("x", -translateX + that.iconOffset)
             .attr("y", -translateY + that.iconSize + that.iconOffset / 2)
             .attr("font-size", that.iconSize - 2);
-          rectTitleDescription
-            .text(function () {
-              const rowName = gData.row;
 
-              return `row: ${rowName}`;
-            })
-            .attr("font-size", "24px")
+          const str = gData.content.split("\n");
+          const strLen = str.length;
+
+          rectTitleDescription
+           .text(str[0])
+            // .text(function () {
+            //   const rowName = gData.row;
+
+            //   return `row: ${rowName}`;
+            // })
+            .attr("font-size", "20px")
             .attr("x", -translateX + that.iconOffset)
             .attr("y", -translateY + that.iconSize + titleHeight)
-            .append("tspan")
-            .attr("x", -translateX + that.iconOffset)
-            .attr("dy", "1.2em")
-            .style("text-align", "left")
-            .text(function () {
-              const colName = gData.col;
-              return `col: ${colName}`;
-            });
+            .style("text-align", "left");
+            for (var i = 1; i < strLen; i++) {
+              rectTitleDescription.append("tspan")
+              .attr("x", -translateX + that.iconOffset)
+              .attr("dy", "1.2em")
+              .style("text-align", "left")
+              .text(str[i]);
+            }
+            // .append("tspan")
+            // .attr("x", -translateX + that.iconOffset)
+            // .attr("dy", "1.2em")
+            // .style("text-align", "left")
+            // .text(function () {
+            //   const colName = gData.col;
+            //   return `col: ${colName}`;
+            // });
           removeIcon.attr(
             "transform",
             `translate(${translateX - that.iconSize - that.iconOffset},${
