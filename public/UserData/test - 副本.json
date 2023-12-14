@@ -2,13 +2,672 @@
     "state": [
         {
             "id" : "S0",
+            "table": {
+                "structure": {
+                  "colDepth": 2,
+                  "rowDepth": 3,
+                  "rowNum": 40,
+                  "colNum": 32,
+                  "rows": [
+                    {
+                      "name": "Nintendo",
+                      "children": [
+                        {
+                          "name": "Nintendo 3DS (3DS)",
+                          "children": [
+                            {
+                              "name": "Europe",
+                              "children": null,
+                              "rowSpan": [0, 0]
+                            },
+                            {
+                              "name": "Japan",
+                              "children": null,
+                              "rowSpan": [1, 1]
+                            },
+                            {
+                              "name": "North America",
+                              "children": null,
+                              "rowSpan": [2, 2]
+                            },
+                            {
+                              "name": "Other",
+                              "children": null,
+                              "rowSpan": [3, 3]
+                            }
+                          ],
+                          "rowSpan": [0, 3]
+                        },
+                        {
+                          "name": "Nintendo DS (DS)",
+                          "children": [
+                            {
+                              "name": "Europe",
+                              "children": null,
+                              "rowSpan": [4, 4]
+                            },
+                            {
+                              "name": "Japan",
+                              "children": null,
+                              "rowSpan": [5, 5]
+                            },
+                            {
+                              "name": "North America",
+                              "children": null,
+                              "rowSpan": [6, 6]
+                            },
+                            {
+                              "name": "Other",
+                              "children": null,
+                              "rowSpan": [7, 7]
+                            }
+                          ],
+                          "rowSpan": [4, 7]
+                        },
+                        {
+                          "name": "Nintendo Switch (NS)",
+                          "children": [
+                            {
+                              "name": "Europe",
+                              "children": null,
+                              "rowSpan": [8, 8]
+                            },
+                            {
+                              "name": "Japan",
+                              "children": null,
+                              "rowSpan": [9, 9]
+                            },
+                            {
+                              "name": "North America",
+                              "children": null,
+                              "rowSpan": [10, 10]
+                            },
+                            {
+                              "name": "Other",
+                              "children": null,
+                              "rowSpan": [11, 11]
+                            }
+                          ],
+                          "rowSpan": [8, 11]
+                        },
+                        {
+                          "name": "Wii (Wii)",
+                          "children": [
+                            {
+                              "name": "Europe",
+                              "children": null,
+                              "rowSpan": [12, 12]
+                            },
+                            {
+                              "name": "Japan",
+                              "children": null,
+                              "rowSpan": [13, 13]
+                            },
+                            {
+                              "name": "North America",
+                              "children": null,
+                              "rowSpan": [14, 14]
+                            },
+                            {
+                              "name": "Other",
+                              "children": null,
+                              "rowSpan": [15, 15]
+                            }
+                          ],
+                          "rowSpan": [12, 15]
+                        },
+                        {
+                          "name": "Wii U (WiiU)",
+                          "children": [
+                            {
+                              "name": "Europe",
+                              "children": null,
+                              "rowSpan": [16, 16]
+                            },
+                            {
+                              "name": "Japan",
+                              "children": null,
+                              "rowSpan": [17, 17]
+                            },
+                            {
+                              "name": "North America",
+                              "children": null,
+                              "rowSpan": [18, 18]
+                            },
+                            {
+                              "name": "Other",
+                              "children": null,
+                              "rowSpan": [19, 19]
+                            }
+                          ],
+                          "rowSpan": [16, 19]
+                        }
+                      ],
+                      "rowSpan": [0, 19]
+                    },
+                    {
+                      "name": "Sony",
+                      "children": [
+                        {
+                          "name": "PlayStation 3 (PS3)",
+                          "children": [
+                            {
+                              "name": "Europe",
+                              "children": null,
+                              "rowSpan": [20, 20]
+                            },
+                            {
+                              "name": "Japan",
+                              "children": null,
+                              "rowSpan": [21, 21]
+                            },
+                            {
+                              "name": "North America",
+                              "children": null,
+                              "rowSpan": [22, 22]
+                            },
+                            {
+                              "name": "Other",
+                              "children": null,
+                              "rowSpan": [23, 23]
+                            }
+                          ],
+                          "rowSpan": [20, 23]
+                        },
+                        {
+                          "name": "PlayStation 4 (PS4)",
+                          "children": [
+                            {
+                              "name": "Europe",
+                              "children": null,
+                              "rowSpan": [24, 24]
+                            },
+                            {
+                              "name": "Japan",
+                              "children": null,
+                              "rowSpan": [25, 25]
+                            },
+                            {
+                              "name": "North America",
+                              "children": null,
+                              "rowSpan": [26, 26]
+                            },
+                            {
+                              "name": "Other",
+                              "children": null,
+                              "rowSpan": [27, 27]
+                            }
+                          ],
+                          "rowSpan": [24, 27]
+                        },
+                        {
+                          "name": "PlayStation Vita (PSV)",
+                          "children": [
+                            {
+                              "name": "Europe",
+                              "children": null,
+                              "rowSpan": [28, 28]
+                            },
+                            {
+                              "name": "Japan",
+                              "children": null,
+                              "rowSpan": [29, 29]
+                            },
+                            {
+                              "name": "North America",
+                              "children": null,
+                              "rowSpan": [30, 30]
+                            },
+                            {
+                              "name": "Other",
+                              "children": null,
+                              "rowSpan": [31, 31]
+                            }
+                          ],
+                          "rowSpan": [28, 31]
+                        }
+                      ],
+                      "rowSpan": [20, 31]
+                    },
+                    {
+                      "name": "Microsoft",
+                      "children": [
+                        {
+                          "name": "Xbox 360 (X360)",
+                          "children": [
+                            {
+                              "name": "Europe",
+                              "children": null,
+                              "rowSpan": [32, 32]
+                            },
+                            {
+                              "name": "Japan",
+                              "children": null,
+                              "rowSpan": [33, 33]
+                            },
+                            {
+                              "name": "North America",
+                              "children": null,
+                              "rowSpan": [34, 34]
+                            },
+                            {
+                              "name": "Other",
+                              "children": null,
+                              "rowSpan": [35, 35]
+                            }
+                          ],
+                          "rowSpan": [32, 35]
+                        },
+                        {
+                          "name": "Xbox One (XOne)",
+                          "children": [
+                            {
+                              "name": "Europe",
+                              "children": null,
+                              "rowSpan": [36, 36]
+                            },
+                            {
+                              "name": "Japan",
+                              "children": null,
+                              "rowSpan": [37, 37]
+                            },
+                            {
+                              "name": "North America",
+                              "children": null,
+                              "rowSpan": [38, 38]
+                            },
+                            {
+                              "name": "Other",
+                              "children": null,
+                              "rowSpan": [39, 39]
+                            }
+                          ],
+                          "rowSpan": [36, 39]
+                        }
+                      ],
+                      "rowSpan": [32, 39]
+                    }
+                  ],
+                  "cols": [
+                    {
+                      "name": "2013",
+                      "children": [
+                        {
+                          "name": "MAR",
+                          "children": null,
+                          "colSpan": [0, 0]
+                        },
+                        {
+                          "name": "JUN",
+                          "children": null,
+                          "colSpan": [1, 1]
+                        },
+                        {
+                          "name": "SEP",
+                          "children": null,
+                          "colSpan": [2, 2]
+                        },
+                        {
+                          "name": "DEC",
+                          "children": null,
+                          "colSpan": [3, 3]
+                        }
+                      ],
+                      "colSpan": [0, 3]
+                    },
+                    {
+                      "name": "2014",
+                      "children": [
+                        {
+                          "name": "MAR",
+                          "children": null,
+                          "colSpan": [4, 4]
+                        },
+                        {
+                          "name": "JUN",
+                          "children": null,
+                          "colSpan": [5, 5]
+                        },
+                        {
+                          "name": "SEP",
+                          "children": null,
+                          "colSpan": [6, 6]
+                        },
+                        {
+                          "name": "DEC",
+                          "children": null,
+                          "colSpan": [7, 7]
+                        }
+                      ],
+                      "colSpan": [4, 7]
+                    },
+                    {
+                      "name": "2015",
+                      "children": [
+                        {
+                          "name": "MAR",
+                          "children": null,
+                          "colSpan": [8, 8]
+                        },
+                        {
+                          "name": "JUN",
+                          "children": null,
+                          "colSpan": [9, 9]
+                        },
+                        {
+                          "name": "SEP",
+                          "children": null,
+                          "colSpan": [10, 10]
+                        },
+                        {
+                          "name": "DEC",
+                          "children": null,
+                          "colSpan": [11, 11]
+                        }
+                      ],
+                      "colSpan": [8, 11]
+                    },
+                    {
+                      "name": "2016",
+                      "children": [
+                        {
+                          "name": "MAR",
+                          "children": null,
+                          "colSpan": [12, 12]
+                        },
+                        {
+                          "name": "JUN",
+                          "children": null,
+                          "colSpan": [13, 13]
+                        },
+                        {
+                          "name": "SEP",
+                          "children": null,
+                          "colSpan": [14, 14]
+                        },
+                        {
+                          "name": "DEC",
+                          "children": null,
+                          "colSpan": [15, 15]
+                        }
+                      ],
+                      "colSpan": [12, 15]
+                    },
+                    {
+                      "name": "2017",
+                      "children": [
+                        {
+                          "name": "MAR",
+                          "children": null,
+                          "colSpan": [16, 16]
+                        },
+                        {
+                          "name": "JUN",
+                          "children": null,
+                          "colSpan": [17, 17]
+                        },
+                        {
+                          "name": "SEP",
+                          "children": null,
+                          "colSpan": [18, 18]
+                        },
+                        {
+                          "name": "DEC",
+                          "children": null,
+                          "colSpan": [19, 19]
+                        }
+                      ],
+                      "colSpan": [16, 19]
+                    },
+                    {
+                      "name": "2018",
+                      "children": [
+                        {
+                          "name": "MAR",
+                          "children": null,
+                          "colSpan": [20, 20]
+                        },
+                        {
+                          "name": "JUN",
+                          "children": null,
+                          "colSpan": [21, 21]
+                        },
+                        {
+                          "name": "SEP",
+                          "children": null,
+                          "colSpan": [22, 22]
+                        },
+                        {
+                          "name": "DEC",
+                          "children": null,
+                          "colSpan": [23, 23]
+                        }
+                      ],
+                      "colSpan": [20, 23]
+                    },
+                    {
+                      "name": "2019",
+                      "children": [
+                        {
+                          "name": "MAR",
+                          "children": null,
+                          "colSpan": [24, 24]
+                        },
+                        {
+                          "name": "JUN",
+                          "children": null,
+                          "colSpan": [25, 25]
+                        },
+                        {
+                          "name": "SEP",
+                          "children": null,
+                          "colSpan": [26, 26]
+                        },
+                        {
+                          "name": "DEC",
+                          "children": null,
+                          "colSpan": [27, 27]
+                        }
+                      ],
+                      "colSpan": [24, 27]
+                    },
+                    {
+                      "name": "2020",
+                      "children": [
+                        {
+                          "name": "MAR",
+                          "children": null,
+                          "colSpan": [28, 28]
+                        },
+                        {
+                          "name": "JUN",
+                          "children": null,
+                          "colSpan": [29, 29]
+                        },
+                        {
+                          "name": "SEP",
+                          "children": null,
+                          "colSpan": [30, 30]
+                        },
+                        {
+                          "name": "DEC",
+                          "children": null,
+                          "colSpan": [31, 31]
+                        }
+                      ],
+                      "colSpan": [28, 31]
+                    }
+                  ]
+                },
+                "heat": [
+                  [
+                    4, 4, 4, 4, 5, 5, 5, 6, 5, 5, 5, 5, 5, 6, 5, 5, 5, 5, 6, 5, 5, 5, 5,
+                    5, 4, 4, 4, 4, 4, 4, 4, 4
+                  ],
+                  [
+                    5, 5, 5, 5, 6, 6, 6, 7, 6, 6, 6, 6, 6, 7, 6, 6, 6, 6, 7, 6, 6, 6, 6,
+                    6, 5, 5, 5, 5, 5, 5, 5, 5
+                  ],
+                  [
+                    4, 4, 4, 4, 5, 5, 5, 6, 5, 5, 5, 5, 5, 6, 5, 5, 5, 5, 6, 5, 5, 5, 5,
+                    5, 4, 4, 4, 4, 4, 4, 4, 4
+                  ],
+                  [
+                    4, 4, 4, 4, 5, 5, 5, 6, 5, 5, 5, 5, 5, 6, 5, 5, 5, 5, 6, 5, 5, 5, 5,
+                    5, 4, 4, 4, 4, 4, 4, 4, 4
+                  ],
+                  [
+                    4, 4, 4, 4, 3, 3, 3, 4, 3, 3, 3, 3, 3, 4, 3, 3, 3, 3, 4, 3, 3, 3, 3,
+                    3, 2, 2, 2, 2, 2, 2, 2, 2
+                  ],
+                  [
+                    4, 4, 4, 4, 3, 3, 3, 4, 3, 3, 3, 3, 3, 4, 3, 3, 3, 3, 4, 3, 3, 3, 3,
+                    3, 2, 2, 2, 2, 2, 2, 2, 2
+                  ],
+                  [
+                    4, 4, 4, 4, 3, 3, 3, 4, 3, 3, 3, 3, 3, 4, 3, 3, 3, 3, 4, 3, 3, 3, 3,
+                    3, 2, 2, 2, 2, 2, 2, 2, 2
+                  ],
+                  [
+                    4, 4, 4, 4, 3, 3, 3, 4, 3, 3, 3, 3, 3, 4, 3, 3, 3, 3, 4, 3, 3, 3, 3,
+                    3, 2, 2, 2, 2, 2, 2, 2, 2
+                  ],
+                  [
+                    4, 4, 4, 4, 4, 4, 4, 5, 4, 4, 4, 4, 4, 5, 4, 4, 5, 5, 6, 5, 5, 5, 5,
+                    5, 3, 3, 3, 3, 3, 3, 3, 3
+                  ],
+                  [
+                    4, 4, 4, 4, 4, 4, 4, 5, 4, 4, 4, 4, 4, 5, 4, 4, 5, 5, 6, 5, 5, 5, 5,
+                    5, 3, 3, 3, 3, 3, 3, 3, 3
+                  ],
+                  [
+                    4, 4, 4, 4, 4, 4, 4, 5, 4, 4, 4, 4, 4, 5, 4, 4, 5, 5, 6, 5, 5, 5, 5,
+                    5, 3, 3, 3, 3, 3, 3, 3, 3
+                  ],
+                  [
+                    4, 4, 4, 4, 4, 4, 4, 5, 4, 4, 4, 4, 4, 5, 4, 4, 5, 5, 6, 5, 5, 5, 5,
+                    5, 3, 3, 3, 3, 3, 3, 3, 3
+                  ],
+                  [
+                    5, 5, 5, 5, 5, 5, 5, 6, 4, 4, 4, 4, 4, 5, 4, 4, 4, 4, 5, 4, 4, 4, 4,
+                    4, 3, 3, 3, 3, 3, 3, 3, 3
+                  ],
+                  [
+                    5, 5, 5, 5, 5, 5, 5, 6, 4, 4, 4, 4, 4, 5, 4, 4, 4, 4, 5, 4, 4, 4, 4,
+                    4, 3, 3, 3, 3, 3, 3, 3, 3
+                  ],
+                  [
+                    5, 5, 5, 5, 5, 5, 5, 6, 4, 4, 4, 4, 4, 5, 4, 4, 4, 4, 5, 4, 4, 4, 4,
+                    4, 3, 3, 3, 3, 3, 3, 3, 3
+                  ],
+                  [
+                    5, 5, 5, 5, 5, 5, 5, 6, 4, 4, 4, 4, 4, 5, 4, 4, 4, 4, 5, 4, 4, 4, 4,
+                    4, 3, 3, 3, 3, 3, 3, 3, 3
+                  ],
+                  [
+                    5, 5, 5, 5, 5, 5, 5, 6, 5, 5, 5, 5, 5, 6, 5, 5, 5, 5, 6, 5, 4, 4, 4,
+                    4, 3, 3, 3, 3, 3, 3, 3, 3
+                  ],
+                  [
+                    5, 5, 5, 5, 5, 5, 5, 6, 5, 5, 5, 5, 5, 6, 5, 5, 5, 5, 6, 5, 4, 4, 4,
+                    4, 3, 3, 3, 3, 3, 3, 3, 3
+                  ],
+                  [
+                    5, 5, 5, 5, 5, 5, 5, 6, 5, 5, 5, 5, 5, 6, 5, 5, 5, 5, 6, 5, 4, 4, 4,
+                    4, 3, 3, 3, 3, 3, 3, 3, 3
+                  ],
+                  [
+                    5, 5, 5, 5, 5, 5, 5, 6, 5, 5, 5, 5, 5, 6, 5, 5, 5, 5, 6, 5, 4, 4, 4,
+                    4, 3, 3, 3, 3, 3, 3, 3, 3
+                  ],
+                  [
+                    5, 5, 5, 5, 6, 5, 5, 7, 6, 5, 5, 6, 6, 7, 6, 6, 6, 5, 6, 5, 3, 3, 3,
+                    3, 4, 4, 4, 4, 4, 4, 4, 4
+                  ],
+                  [
+                    5, 5, 5, 5, 6, 5, 5, 7, 6, 5, 5, 6, 6, 7, 6, 6, 6, 5, 6, 5, 3, 3, 3,
+                    3, 4, 4, 4, 4, 4, 4, 4, 4
+                  ],
+                  [
+                    5, 5, 5, 5, 6, 5, 5, 7, 6, 5, 5, 6, 6, 7, 6, 6, 6, 5, 6, 5, 3, 3, 3,
+                    3, 4, 4, 4, 4, 4, 4, 4, 4
+                  ],
+                  [
+                    5, 5, 5, 5, 6, 5, 5, 7, 6, 5, 5, 6, 6, 7, 6, 6, 6, 5, 6, 5, 3, 3, 3,
+                    3, 4, 4, 4, 4, 4, 4, 4, 4
+                  ],
+                  [
+                    4, 4, 4, 4, 6, 5, 5, 7, 6, 5, 5, 6, 6, 7, 6, 6, 5, 4, 5, 4, 4, 4, 4,
+                    4, 4, 4, 4, 4, 5, 5, 5, 5
+                  ],
+                  [
+                    4, 4, 4, 4, 6, 5, 5, 7, 6, 5, 5, 6, 6, 7, 6, 6, 5, 4, 5, 4, 4, 4, 4,
+                    4, 4, 4, 4, 4, 5, 5, 5, 5
+                  ],
+                  [
+                    4, 4, 4, 4, 6, 5, 5, 7, 6, 5, 5, 6, 6, 7, 6, 6, 5, 4, 5, 4, 4, 4, 4,
+                    4, 4, 4, 4, 4, 5, 5, 5, 5
+                  ],
+                  [
+                    4, 4, 4, 4, 6, 5, 5, 7, 6, 5, 5, 6, 6, 7, 6, 6, 5, 4, 5, 4, 4, 4, 4,
+                    4, 4, 4, 4, 4, 5, 5, 5, 5
+                  ],
+                  [
+                    5, 5, 5, 5, 5, 4, 4, 6, 6, 5, 5, 6, 6, 7, 6, 6, 6, 5, 6, 5, 4, 4, 4,
+                    4, 5, 5, 5, 5, 4, 4, 4, 4
+                  ],
+                  [
+                    5, 5, 5, 5, 5, 4, 4, 6, 6, 5, 5, 6, 6, 7, 6, 6, 6, 5, 6, 5, 4, 4, 4,
+                    4, 5, 5, 5, 5, 4, 4, 4, 4
+                  ],
+                  [
+                    5, 5, 5, 5, 5, 4, 4, 6, 6, 5, 5, 6, 6, 7, 6, 6, 6, 5, 6, 5, 4, 4, 4,
+                    4, 5, 5, 5, 5, 4, 4, 4, 4
+                  ],
+                  [
+                    5, 5, 5, 5, 5, 4, 4, 6, 6, 5, 5, 6, 6, 7, 6, 6, 6, 5, 6, 5, 4, 4, 4,
+                    4, 5, 5, 5, 5, 4, 4, 4, 4
+                  ],
+                  [
+                    5, 5, 5, 5, 4, 4, 4, 5, 5, 5, 5, 5, 5, 6, 5, 5, 5, 5, 6, 5, 4, 4, 4,
+                    4, 4, 4, 4, 4, 4, 4, 4, 4
+                  ],
+                  [
+                    5, 5, 5, 5, 4, 4, 4, 5, 5, 5, 5, 5, 5, 6, 5, 5, 5, 5, 6, 5, 4, 4, 4,
+                    4, 4, 4, 4, 4, 4, 4, 4, 4
+                  ],
+                  [
+                    5, 5, 5, 5, 4, 4, 4, 5, 5, 5, 5, 5, 5, 6, 5, 5, 5, 5, 6, 5, 4, 4, 4,
+                    4, 4, 4, 4, 4, 4, 4, 4, 4
+                  ],
+                  [
+                    5, 5, 5, 5, 4, 4, 4, 5, 5, 5, 5, 5, 5, 6, 5, 5, 5, 5, 6, 5, 4, 4, 4,
+                    4, 4, 4, 4, 4, 4, 4, 4, 4
+                  ],
+                  [
+                    4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 6, 5, 5, 5, 5, 6, 5, 5, 5, 5,
+                    5, 5, 5, 5, 5, 5, 5, 5, 5
+                  ],
+                  [
+                    4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 6, 5, 5, 5, 5, 6, 5, 5, 5, 5,
+                    5, 5, 5, 5, 5, 5, 5, 5, 5
+                  ],
+                  [
+                    4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 6, 5, 5, 5, 5, 6, 5, 5, 5, 5,
+                    5, 5, 5, 5, 5, 5, 5, 5, 5
+                  ],
+                  [
+                    4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 6, 5, 5, 5, 5, 6, 5, 5, 5, 5,
+                    5, 5, 5, 5, 5, 5, 5, 5, 5
+                  ]
+                ]
+            },
             "graph": {
                 "nodes": [
                     {
                         "id": "0_-2013_",
                         "row": "_",
                         "col": "2013",
-                        "title": "0_-2013",
                         "content": "1111111111111111",
                         "insight-list": [
                           {
@@ -24,7 +683,6 @@
                         "id": "0_-2014_",
                         "row": "_",
                         "col": "2014",
-                        "title": "0_-2014",
                         "content": "1111111111111111\n22222222222222222222222",
                         "insight-list": [
                           {
@@ -40,7 +698,6 @@
                       "id": "1_Europe-2013_",
                       "row": "Europe",
                       "col": "2013",
-                      "title": "1_Europe-2013",
                       "content": "1111111111111111",
                       "insight-list": [
                         {
@@ -56,7 +713,6 @@
                       "id": "1_Japan-2013_",
                       "row": "Japan",
                       "col": "2013",
-                      "title": "1_Japan-2013",
                       "content": "1111111111111111",
                       "insight-list": [
                         {
@@ -72,7 +728,6 @@
                       "id": "1_Other-2013_",
                       "row": "Other",
                       "col": "2013",
-                      "title": "1_Other-2013",
                       "content": "1111111111111111",
                       "insight-list": [
                         {
@@ -88,7 +743,6 @@
                       "id": "2_Microsoft_North America-2013_",
                       "row": "Microsoft_North America",
                       "col": "2013",
-                      "title": "2_Microsoft_North America-2013",
                       "content": "1111111111111111",
                       "insight-list": [
                         {
@@ -104,7 +758,6 @@
                       "id": "2_Microsoft_Other-2013_",
                       "row": "Microsoft_Other",
                       "col": "2013",
-                      "title": "2_Microsoft_Other-2013",
                       "content": "1111111111111111",
                       "insight-list": [
                         {
@@ -120,7 +773,6 @@
                       "id": "2_Nintendo_Europe-2013_",
                       "row": "Nintendo_Europe",
                       "col": "2013",
-                      "title": "2_Nintendo_Europe-2013",
                       "content": "1111111111111111",
                       "insight-list": [
                         {
@@ -136,7 +788,6 @@
                       "id": "测试id",
                       "row": "测试row",
                       "col": "测试col",
-                      "title": "测试title",
                       "content": "1111111111111111",
                       "insight-list": [
                         {
@@ -152,7 +803,6 @@
                       "id": "测试id2",
                       "row": "测试row2",
                       "col": "测试col2",
-                      "title": "测试title2",
                       "content": "1111111111111111",
                       "insight-list": [
                         {

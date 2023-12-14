@@ -182,16 +182,17 @@ export default {
           const childDict = dict[currentName].children;
           const newPath = path.filter((name) => name !== currentName);
 
-          if (newPath.length > 0) {
-            if (childDict) {
-              span.push(...findCrossStateSpan(newPath, childDict, mode));
-            }
-          } else {
-            const target = mode === "row" ? "rowSpan" : "colSpan";
+          // if (newPath.length > 0) {
+          //   if (childDict) {
+          //     span.push(...findCrossStateSpan(newPath, childDict, mode));
+          //   }
+          // } else {
+          //   const target = mode === "row" ? "rowSpan" : "colSpan";
 
-            return [dict[currentName][target]];
-          }
-        } else {
+          //   return [dict[currentName][target]];
+          // }
+        } 
+        else {
           for (const nameInfo of Object.values(dict)) {
             if (nameInfo.children) {
               span.push(...findCrossStateSpan(path, nameInfo.children, mode));
@@ -206,34 +207,34 @@ export default {
       const data = payload.data;
       const mode = payload.mode;
 
-      if (data) {
-        for (let [key, value] of data.entries()) {
-          const rowName = value.row;
-          const colName = value.col;
-          const rowDict = context.getters.rowDict;
-          const colDict = context.getters.colDict;
+      // if (data) {
+      //   for (let [key, value] of data.entries()) {
+      //     const rowName = value.row;
+      //     const colName = value.col;
+      //     const rowDict = context.getters.rowDict;
+      //     const colDict = context.getters.colDict;
 
-          let colSpan = null;
-          if (colName === "_") {
-            colSpan = [0, context.getters.tableData.colNum - 1];
-          } else {
-            colSpan = findSpan(colName, colDict, "col");
-          }
-          let rowSpan = null;
-          if (rowName === "_") {
-            rowSpan = [0, context.getters.tableData.rowNum - 1];
-          } else {
-            rowSpan = findSpan(rowName, rowDict, "row");
-          }
+      //     let colSpan = null;
+      //     if (colName === "_") {
+      //       colSpan = [0, context.getters.tableData.colNum - 1];
+      //     } else {
+      //       colSpan = findSpan(colName, colDict, "col");
+      //     }
+      //     let rowSpan = null;
+      //     if (rowName === "_") {
+      //       rowSpan = [0, context.getters.tableData.rowNum - 1];
+      //     } else {
+      //       rowSpan = findSpan(rowName, rowDict, "row");
+      //     }
 
-          result.set(key, {
-            rowSpan: rowSpan,
-            colSpan: colSpan,
-          });
-        }
-      } else {
-        result = null;
-      }
+      //     result.set(key, {
+      //       rowSpan: rowSpan,
+      //       colSpan: colSpan,
+      //     });
+      //   }
+      // } else {
+      //   result = null;
+      // }
 
       if (mode === "checked") context.commit("setCheckedArea", result);
       else if (mode === "hovered") context.commit("setHoveredArea", result);
@@ -241,7 +242,7 @@ export default {
 
       function findSpan(name, dict, mode) {
         const path = name.split("_");
-        const target = mode === "row" ? "rowSpan" : "colSpan";
+        // const target = mode === "row" ? "rowSpan" : "colSpan";
         let info = dict[path[0]];
         for (let i = 1; i < path.length; i++) {
           info = info.children[path[i]];
@@ -251,19 +252,19 @@ export default {
     },
 
     loadHeadData(context, payload) {
-      if (payload) {
-        const data = payload.structure;
+      // if (payload) {
+      //   const data = payload.structure;
 
-        context.commit("setTableData", data);
-        context.commit("setRowDict", listToDict(data.rows));
-        context.commit("setColDict", listToDict(data.cols));
-        context.commit("setRowNameList", getNameList(data.rows));
-        context.commit("setColNameList", getNameList(data.cols));
-        context.commit("setHeatValues", payload.heat);
+      //   context.commit("setTableData", data);
+      //   context.commit("setRowDict", listToDict(data.rows));
+      //   context.commit("setColDict", listToDict(data.cols));
+      //   context.commit("setRowNameList", getNameList(data.rows));
+      //   context.commit("setColNameList", getNameList(data.cols));
+      //   context.commit("setHeatValues", payload.heat);
         
-      } else {
-        context.commit("setTableData", null);
-      }
+      // } else {
+      //   context.commit("setTableData", null);
+      // }
       function listToDict(list) {
         let obj = {};
         for (let item of list) {

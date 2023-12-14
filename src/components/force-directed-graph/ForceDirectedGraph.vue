@@ -976,7 +976,7 @@ export default {
           const nodeNumT = d.target.nodeNum;
           return (
             this.linkDistanceScale(nodeNumS) + this.linkDistanceScale(nodeNumT)
-            );
+            ) * 2.5;
           });
           // 保存当前的bundleData
         this.globalBundleData = globalBundleData;
@@ -1393,14 +1393,37 @@ export default {
 
     confirm() {
       this.dialogVisible = false;
+
+      var S0node = "";
+      if (this.recordState != this.focusState) {
+        let flag = false;
+
+        this.waitAddList.forEach(element => {
+          if (element.state === this.focusState) {
+            S0node = element.id;
+            flag = true;
+          }
+        });
+
+        if (!flag) {
+          this.waitAddList = [];
+          this.hasAddName = [];
+          this.input1 = "";
+          this.input2 = "";
+          alert("请在主界面中选择一个要连接的节点");
+          return;
+        }
+      }
+
       const tmpnodes = {
         id: this.input1,
         row: "_",
         col: "_",
+        title: this.input1,
         content: this.input2,
         "insight-list": [
           {
-            "insight-type": this.input1,
+            "insight-type": "kurtosis",
             "insight-category": "shape",
             "insight-score": 3.279028305023484,
             "vega-lite": "{\"data\": {\"values\": [{\"category\": \"Microsoft - Xbox 360 (X360) - Europe - MAR\", \"value\": 669.9999999999982}, {\"category\": \"Microsoft - Xbox 360 (X360) - Japan - MAR\", \"value\": 19.999999999999794}, {\"category\": \"Microsoft - Xbox 360 (X360) - North America - MAR\", \"value\": 1580.0000000000055}, {\"category\": \"Microsoft - Xbox 360 (X360) - Other - MAR\", \"value\": 179.99999999999972}, {\"category\": \"Nintendo - Nintendo 3DS (3DS) - Europe - MAR\", \"value\": 1370.0}, {\"category\": \"Nintendo - Nintendo 3DS (3DS) - Japan - MAR\", \"value\": 2090.0}, {\"category\": \"Nintendo - Nintendo 3DS (3DS) - North America - MAR\", \"value\": 1410.0000000000002}, {\"category\": \"Nintendo - Nintendo 3DS (3DS) - Other - MAR\", \"value\": 309.99999999999983}, {\"category\": \"Nintendo - Nintendo DS (DS) - Europe - MAR\", \"value\": 250.0}, {\"category\": \"Nintendo - Nintendo DS (DS) - North America - MAR\", \"value\": 469.99999999999886}, {\"category\": \"Nintendo - Wii (Wii) - Europe - MAR\", \"value\": 410.0000000000037}, {\"category\": \"Nintendo - Wii (Wii) - Japan - MAR\", \"value\": 49.999999999998934}, {\"category\": \"Nintendo - Wii (Wii) - North America - MAR\", \"value\": 560.0000000000023}, {\"category\": \"Nintendo - Wii (Wii) - Other - MAR\", \"value\": 39.99999999999915}, {\"category\": \"Nintendo - Wii U (WiiU) - Europe - MAR\", \"value\": 290.00000000000006}, {\"category\": \"Nintendo - Wii U (WiiU) - Japan - MAR\", \"value\": 510.0}, {\"category\": \"Nintendo - Wii U (WiiU) - North America - MAR\", \"value\": 409.99999999999994}, {\"category\": \"Nintendo - Wii U (WiiU) - Other - MAR\", \"value\": 90.0}, {\"category\": \"Sony - PlayStation 3 (PS3) - Europe - MAR\", \"value\": 1329.9999999999982}, {\"category\": \"Sony - PlayStation 3 (PS3) - Japan - MAR\", \"value\": 380.0000000000008}, {\"category\": \"Sony - PlayStation 3 (PS3) - North America - MAR\", \"value\": 960.0000000000009}, {\"category\": \"Sony - PlayStation 3 (PS3) - Other - MAR\", \"value\": 490.0000000000002}, {\"category\": \"Sony - PlayStation Vita (PSV) - Europe - MAR\", \"value\": 169.99999999999994}, {\"category\": \"Sony - PlayStation Vita (PSV) - Japan - MAR\", \"value\": 270.0}, {\"category\": \"Sony - PlayStation Vita (PSV) - North America - MAR\", \"value\": 140.0000000000001}, {\"category\": \"Sony - PlayStation Vita (PSV) - Other - MAR\", \"value\": 60.0}, {\"category\": \"Microsoft - Xbox 360 (X360) - Europe - JUN\", \"value\": 980.0000000000005}, {\"category\": \"Microsoft - Xbox 360 (X360) - North America - JUN\", \"value\": 1469.9999999999989}, {\"category\": \"Microsoft - Xbox 360 (X360) - Other - JUN\", \"value\": 240.00000000000023}, {\"category\": \"Nintendo - Nintendo 3DS (3DS) - Europe - JUN\", \"value\": 549.9999999999998}, {\"category\": \"Nintendo - Nintendo 3DS (3DS) - Japan - JUN\", \"value\": 660.0000000000001}, {\"category\": \"Nintendo - Nintendo 3DS (3DS) - North America - JUN\", \"value\": 580.0000000000001}, {\"category\": \"Nintendo - Nintendo 3DS (3DS) - Other - JUN\", \"value\": 70.00000000000006}, {\"category\": \"Nintendo - Nintendo DS (DS) - Europe - JUN\", \"value\": 39.99999999999915}, {\"category\": \"Nintendo - Nintendo DS (DS) - North America - JUN\", \"value\": 170.0000000000017}, {\"category\": \"Nintendo - Wii (Wii) - Europe - JUN\", \"value\": 509.999999999998}, {\"category\": \"Nintendo - Wii (Wii) - Japan - JUN\", \"value\": 20.00000000000135}, {\"category\": \"Nintendo - Wii (Wii) - North America - JUN\", \"value\": 179.99999999999972}, {\"category\": \"Nintendo - Wii (Wii) - Other - JUN\", \"value\": 29.99999999999936}, {\"category\": \"Nintendo - Wii U (WiiU) - Europe - JUN\", \"value\": 89.99999999999997}, {\"category\": \"Nintendo - Wii U (WiiU) - Japan - JUN\", \"value\": 110.0000000000001}, {\"category\": \"Nintendo - Wii U (WiiU) - North America - JUN\", \"value\": 130.0000000000001}, {\"category\": \"Nintendo - Wii U (WiiU) - Other - JUN\", \"value\": 30.0}, {\"category\": \"Sony - PlayStation 3 (PS3) - Europe - JUN\", \"value\": 2010.0000000000016}, {\"category\": \"Sony - PlayStation 3 (PS3) - Japan - JUN\", \"value\": 179.99999999999972}, {\"category\": \"Sony - PlayStation 3 (PS3) - North America - JUN\", \"value\": 489.9999999999984}, {\"category\": \"Sony - PlayStation 3 (PS3) - Other - JUN\", \"value\": 1300.0000000000007}, {\"category\": \"Sony - PlayStation Vita (PSV) - Europe - JUN\", \"value\": 330.00000000000006}, {\"category\": \"Sony - PlayStation Vita (PSV) - Japan - JUN\", \"value\": 229.99999999999997}, {\"category\": \"Sony - PlayStation Vita (PSV) - North America - JUN\", \"value\": 69.99999999999984}, {\"category\": \"Sony - PlayStation Vita (PSV) - Other - JUN\", \"value\": 140.0}, {\"category\": \"Microsoft - Xbox 360 (X360) - Europe - SEP\", \"value\": 399.9999999999986}, {\"category\": \"Microsoft - Xbox 360 (X360) - Japan - SEP\", \"value\": 10.000000000000009}, {\"category\": \"Microsoft - Xbox 360 (X360) - North America - SEP\", \"value\": 519.999999999996}, {\"category\": \"Microsoft - Xbox 360 (X360) - Other - SEP\", \"value\": 80.00000000000007}, {\"category\": \"Nintendo - Nintendo 3DS (3DS) - Europe - SEP\", \"value\": 660.0000000000001}, {\"category\": \"Nintendo - Nintendo 3DS (3DS) - Japan - SEP\", \"value\": 789.9999999999991}, {\"category\": \"Nintendo - Nintendo 3DS (3DS) - North America - SEP\", \"value\": 639.9999999999987}, {\"category\": \"Nintendo - Nintendo 3DS (3DS) - Other - SEP\", \"value\": 130.0000000000001}, {\"category\": \"Nintendo - Nintendo DS (DS) - North America - SEP\", \"value\": 140.00000000000057}, {\"category\": \"Nintendo - Wii (Wii) - Europe - SEP\", \"value\": 149.99999999999858}, {\"category\": \"Nintendo - Wii (Wii) - Japan - SEP\", \"value\": 19.999999999999574}, {\"category\": \"Nintendo - Wii (Wii) - North America - SEP\", \"value\": 159.9999999999966}, {\"category\": \"Nintendo - Wii U (WiiU) - Europe - SEP\", \"value\": 89.99999999999997}, {\"category\": \"Nintendo - Wii U (WiiU) - Japan - SEP\", \"value\": 130.0}, {\"category\": \"Nintendo - Wii U (WiiU) - North America - SEP\", \"value\": 139.99999999999991}, {\"category\": \"Nintendo - Wii U (WiiU) - Other - SEP\", \"value\": 30.0}, {\"category\": \"Sony - PlayStation 3 (PS3) - Europe - SEP\", \"value\": 699.9999999999993}, {\"category\": \"Sony - PlayStation 3 (PS3) - Japan - SEP\", \"value\": 179.99999999999972}, {\"category\": \"Sony - PlayStation 3 (PS3) - North America - SEP\", \"value\": 379.999999999999}, {\"category\": \"Sony - PlayStation 3 (PS3) - Other - SEP\", \"value\": 390.00000000000057}, {\"category\": \"Sony - PlayStation Vita (PSV) - Europe - SEP\", \"value\": 130.0000000000001}, {\"category\": \"Sony - PlayStation Vita (PSV) - Japan - SEP\", \"value\": 229.99999999999997}, {\"category\": \"Sony - PlayStation Vita (PSV) - North America - SEP\", \"value\": 110.0000000000001}, {\"category\": \"Sony - PlayStation Vita (PSV) - Other - SEP\", \"value\": 70.0}, {\"category\": \"Microsoft - Xbox 360 (X360) - Europe - DEC\", \"value\": 310.0000000000023}, {\"category\": \"Microsoft - Xbox 360 (X360) - North America - DEC\", \"value\": 350.0000000000014}, {\"category\": \"Microsoft - Xbox 360 (X360) - Other - DEC\", \"value\": 79.99999999999918}, {\"category\": \"Nintendo - Nintendo 3DS (3DS) - Europe - DEC\", \"value\": 949.9999999999993}, {\"category\": \"Nintendo - Nintendo 3DS (3DS) - Japan - DEC\", \"value\": 1380.0000000000007}, {\"category\": \"Nintendo - Nintendo 3DS (3DS) - North America - DEC\", \"value\": 860.0000000000013}, {\"category\": \"Nintendo - Nintendo 3DS (3DS) - Other - DEC\", \"value\": 169.99999999999994}, {\"category\": \"Nintendo - Nintendo DS (DS) - North America - DEC\", \"value\": 49.99999999999716}, {\"category\": \"Nintendo - Wii (Wii) - Europe - DEC\", \"value\": 140.00000000000057}, {\"category\": \"Nintendo - Wii (Wii) - Japan - DEC\", \"value\": 9.999999999999787}, {\"category\": \"Nintendo - Wii (Wii) - North America - DEC\", \"value\": 120.00000000000455}, {\"category\": \"Nintendo - Wii U (WiiU) - Europe - DEC\", \"value\": 130.0}, {\"category\": \"Nintendo - Wii U (WiiU) - Japan - DEC\", \"value\": 89.99999999999986}, {\"category\": \"Nintendo - Wii U (WiiU) - North America - DEC\", \"value\": 189.99999999999994}, {\"category\": \"Nintendo - Wii U (WiiU) - Other - DEC\", \"value\": 30.00000000000003}, {\"category\": \"Sony - PlayStation 3 (PS3) - Europe - DEC\", \"value\": 669.9999999999982}, {\"category\": \"Sony - PlayStation 3 (PS3) - Japan - DEC\", \"value\": 109.99999999999943}, {\"category\": \"Sony - PlayStation 3 (PS3) - North America - DEC\", \"value\": 390.00000000000057}, {\"category\": \"Sony - PlayStation 3 (PS3) - Other - DEC\", \"value\": 279.9999999999994}, {\"category\": \"Sony - PlayStation Vita (PSV) - Europe - DEC\", \"value\": 229.99999999999977}, {\"category\": \"Sony - PlayStation Vita (PSV) - Japan - DEC\", \"value\": 179.99999999999994}, {\"category\": \"Sony - PlayStation Vita (PSV) - North America - DEC\", \"value\": 79.99999999999984}, {\"category\": \"Sony - PlayStation Vita (PSV) - Other - DEC\", \"value\": 40.000000000000036}]}, \"transform\": [{\"density\": \"value\"}], \"mark\": {\"type\": \"area\", \"color\": {\"x1\": 1, \"y1\": 1, \"x2\": 1, \"y2\": 0, \"gradient\": \"linear\", \"stops\": [{\"offset\": 0, \"color\": \"white\"}, {\"offset\": 1, \"color\": \"#e6550d\"}]}}, \"encoding\": {\"x\": {\"field\": \"value\", \"title\": null, \"type\": \"quantitative\"}, \"y\": {\"field\": \"density\", \"type\": \"quantitative\"}}}"
@@ -1410,24 +1433,34 @@ export default {
       };
       window.totalData.graph.nodes.push(tmpnodes);
 
-      this.waitAddList.forEach(element => {
-        if (this.recordState == element.state) {
-          window.totalData.graph.links.push({
-            source: tmpnodes.id,
-            target: element.id,
-            type: "siblings"
-          });
+      // this.waitAddList.forEach(element => {
+      //   if (this.recordState == element.state) {
+      //     window.totalData.graph.links.push({
+      //       source: tmpnodes.id,
+      //       target: element.id,
+      //       type: "siblings"
+      //     });
+      //   }
+      //   else {
+      //     if (!window.totalData.state_links.hasOwnProperty(this.input1)) {
+      //       window.totalData.state_links[this.input1] = {};
+      //     }
+      //     if (!window.totalData.state_links[this.input1].hasOwnProperty("element.state")) {
+      //       window.totalData.state_links[this.input1][element.state] = [];
+      //     }
+      //     window.totalData.state_links[this.input1][element.state].push(element.id);
+      //   }
+      // });
+
+      if (this.recordState != this.focusState) {
+        if (!window.totalData.state_links.hasOwnProperty(S0node)) {
+          window.totalData.state_links[S0node] = {};
         }
-        else {
-          if (!window.totalData.state_links.hasOwnProperty(this.input1)) {
-            window.totalData.state_links[this.input1] = {};
-          }
-          if (!window.totalData.state_links[this.input1].hasOwnProperty("element.state")) {
-            window.totalData.state_links[this.input1][element.state] = [];
-          }
-          window.totalData.state_links[this.input1][element.state].push(element.id);
+        if (!window.totalData.state_links[S0node].hasOwnProperty(this.recordState)) {
+          window.totalData.state_links[S0node][this.recordState] = [];
         }
-      });
+        window.totalData.state_links[S0node][this.recordState].push(this.input1);
+      }
 
       this.waitAddList = [];
       this.hasAddName = [];
@@ -1555,7 +1588,7 @@ export default {
       const that = this;
       const newBoundaryR = svgRScale(nodeNum);
       const newViewBoxScale = this.svgViewBoxScale(nodeNum);
-      const newWidth = newBoundaryR * 2.5;
+      const newWidth = newBoundaryR * 5;
       const newHeight = newWidth;
       const viewBoxSize = newBoundaryR * newViewBoxScale;
 
@@ -2000,7 +2033,7 @@ export default {
               .append("path")
               .attr("fill", "none")
               .attr("stroke", "#858eb5")
-              .attr("stroke-opacity", "0.8")
+              .attr("stroke-opacity", "0")
               .attr("opacity", 1)
               .transition()
               .duration(this.durationTime)
@@ -3354,11 +3387,11 @@ export default {
             const imgInfo = gData.img;
             preView.toCanvas(5).then((canvas) => {
               // Access the canvas element and export as an image
-              const image = null;
-              // document.createElementNS(
-              //   "http://www.w3.org/2000/svg",
-              //   "image"
-              // );
+              const image = 
+              document.createElementNS(
+                "http://www.w3.org/2000/svg",
+                "image"
+              );
               // image.setAttribute("href", canvas.toDataURL("image/png", 1));
               // image.setAttribute("width", imgInfo.width);
               // image.setAttribute("height", imgInfo.height);
@@ -3462,7 +3495,7 @@ export default {
 
           rectTitleName
             .text(function () {
-              return gData["insight-list"][gData.insightIndex]["insight-type"];
+              return gData.title;
             })
             .attr("x", -translateX + that.iconOffset)
             .attr("y", -translateY + that.iconSize + that.iconOffset / 2)
@@ -3528,11 +3561,11 @@ export default {
               const imgInfo = gData.img;
               view.toCanvas(5).then((canvas) => {
                 // Access the canvas element and export as an image
-                const image = null;
-                // document.createElementNS(
-                //   "http://www.w3.org/2000/svg",
-                //   "image"
-                // );
+                const image =
+                document.createElementNS(
+                  "http://www.w3.org/2000/svg",
+                  "image"
+                );
                 // image.setAttribute("href", canvas.toDataURL("image/png", 1));
                 // image.setAttribute("width", imgInfo.width);
                 // image.setAttribute("height", imgInfo.height);
