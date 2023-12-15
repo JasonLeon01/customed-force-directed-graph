@@ -6,6 +6,7 @@
   >
     <nav class="navBar">
       <div class="nav-title">信息交互模型</div>
+      <div class="download" @click="download">下载</div>
       <div class="nav-button-box">
 
       </div>
@@ -71,6 +72,8 @@ export default {
   },
   data() {
     return {
+      startTime: null,
+      elapsedTime: 0,
       count: 0,
       refreshFlag: false,
       editMode: true,
@@ -102,6 +105,11 @@ export default {
         setTimeout(() => ElMessage.error("Please reload again"), 500);
       }
       if (!newVal.state) {
+        if (this.elapsedTime != 0) {
+          console.log("计算时间：" + this.elapsedTime + "ms");
+          this.elapsedTime = 0;
+          clearInterval(this.startTime);
+        }
         ElMessage.success(`Calculation complete`);
       }
     },
@@ -124,8 +132,26 @@ export default {
     };
   },
   methods: {
+    download() {
+      innerDownload(window.totalData, "数据.json", 'text/json');
+      function innerDownload(content, fileName, contentType) {
+        let contentStr = JSON.stringify(content);
+        let a = document.createElement("a");
+        var file = new Blob([contentStr], { type: contentType });
+        a.href = URL.createObjectURL(file);
+        a.download = fileName;
+        a.click();
+      }
+    },
+
     autoExecuteFunction() {
       self = this;
+      self.startTime = new Date();
+
+      setInterval(() => {
+        self.elapsedTime = new Date() - self.startTime;
+      }, 1);
+
       getHierarchicalData("test.json").then(function(hierarchicalData) {
         window.totalData = hierarchicalData.state[0];
         let treeDataDeferObj = $.Deferred()
@@ -274,6 +300,18 @@ export default {
   font-weight: bold;
   color: #545b77;
   /* font-style: italic; */
+}
+
+.download {
+  font-size: 20px;
+  font-weight: bold;
+  position: absolute;
+  right: 1%;
+  color: #545b77;
+}
+
+.download:hover{
+  background-color: #cecece;
 }
 
 .loading-mask {
