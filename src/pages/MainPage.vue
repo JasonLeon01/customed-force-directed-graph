@@ -106,11 +106,13 @@ export default {
       }
       if (!newVal.state) {
         if (this.elapsedTime != 0) {
-          console.log("计算时间：" + this.elapsedTime + "ms");
+          ElMessage.success(`计算完成, 耗时: ${this.elapsedTime}ms`);
           this.elapsedTime = 0;
           clearInterval(this.startTime);
         }
-        ElMessage.success(`Calculation complete`);
+        else {
+          ElMessage.success(`计算完成`);
+        }
       }
     },
     error_ph(newVal) {
@@ -119,7 +121,7 @@ export default {
         setTimeout(() => ElMessage.error("Please reload again"), 500);
       }
       if (!newVal.state) {
-        ElMessage.success(`Calculation complete`);
+        ElMessage.success(`计算完成`);
       }
     },
   },
