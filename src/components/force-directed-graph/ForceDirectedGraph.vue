@@ -453,7 +453,7 @@ export default {
       containerHeight: null,
 
       // mutiple states
-      focusState: "S0",
+      focusState: "系统启动",
       oldFocusState: null,
       selectedNodes: new Map(),
       checkIndexs: new Map(),
